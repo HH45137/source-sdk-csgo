@@ -1,0 +1,59 @@
+#!/usr/bin/env python
+
+def options(opt):
+	return
+
+def configure(conf):
+	conf.env.append_unique('DEFINES', ['MATHLIB_LIB'])
+
+def build(bld):
+	source = [
+		'expressioncalculator.cpp',
+		'color_conversion.cpp',
+		'cholesky.cpp',
+		'halton.cpp',
+		'lightdesc.cpp',
+		'mathlib_base.cpp',
+		'powsse.cpp',
+		'sparse_convolution_noise.cpp',
+		'sseconst.cpp',
+		'sse.cpp',
+		'ssenoise.cpp',
+		'anorms.cpp',
+		'bumpvects.cpp',
+		'IceKey.cpp',
+		'kdop.cpp',
+		'imagequant.cpp',
+		'spherical.cpp',
+		'polyhedron.cpp',
+		'quantize.cpp',
+		'randsse.cpp',
+		'simdvectormatrix.cpp',
+		'vmatrix.cpp',
+		'almostequal.cpp',
+		'simplex.cpp',
+		'eigen.cpp',
+		'box_buoyancy.cpp', # doesn't compile in debug under GCC 4.2.X
+		'camera.cpp',
+		'planefit.cpp',
+		'polygon.cpp',
+		'volumeculler.cpp',
+		'transform.cpp',
+		'sphere.cpp',
+		'capsule.cpp'
+	]
+
+	includes = [
+		'../public/mathlib'
+	]
+
+	libs = []
+
+	bld.stlib(
+		target = 'mathlib',
+		features = 'c cxx',
+		source = source,
+		includes = includes,
+		use = libs,
+		subsystem = bld.env.MSVC_SUBSYSTEM
+	)

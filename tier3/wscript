@@ -1,0 +1,29 @@
+#!/usr/bin/env python
+
+def options(opt):
+	return
+
+def configure(conf):
+	return
+
+def build(bld):
+	source = [
+		'tier3.cpp',
+		'mdlutils.cpp',
+		'choreoutils.cpp',
+		'scenetokenprocessor.cpp',
+		'studiohdrstub.cpp'
+	]
+
+	includes = []
+
+	libs = []
+
+	bld.stlib(
+		target = 'tier3',
+		features = 'c cxx',
+		source = source,
+		includes = includes,
+		use = libs,
+		subsystem = bld.env.MSVC_SUBSYSTEM
+	)
