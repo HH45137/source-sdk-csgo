@@ -14,10 +14,12 @@ SubProjects = [
 	'interfaces',
 	'mathlib',
 	'mathlib/extended',
+	'thirdparty/JoltPhysics',
 	'tier0',
 	'tier1',
 	'tier2',
 	'tier3',
+	'vphysics',
 	'vstdlib'
 ]
 
