@@ -227,39 +227,35 @@ void JoltPhysicsDebugRenderer::RenderPhysicsSystem( JPH::PhysicsSystem &physicsS
 	if ( !GetDebugOverlay() || !vjolt_debugrender.GetBool())
 		return;
 
+	JPH::BodyManager::DrawSettings drawSettings;
+
 #ifndef VJOLT_USE_PHYSICS_DEBUG_OVERLAY
 	const bool wireframe = vjolt_debugrender_wireframe.GetBool();
 
-	JPH::BodyManager::DrawSettings drawSettings
-	{
-		.mDrawGetSupportFunction	= false,			///< Draw the GetSupport() function, used for convex collision detection	
-		.mDrawSupportDirection		= false,			///< When drawing the support function, also draw which direction mapped to a specific support point
-		.mDrawGetSupportingFace		= false,			///< Draw the faces that were found colliding during collision detection
-		.mDrawShape					= true,				///< Draw the shapes of all bodies
-		.mDrawShapeWireframe		= wireframe,		///< When mDrawShape is true and this is true, the shapes will be drawn in wireframe instead of solid.
-		.mDrawShapeColor			= GetColorMode(),	///< Coloring scheme to use for shapes
-		.mDrawBoundingBox			= false,			///< Draw a bounding box per body
-		.mDrawCenterOfMassTransform	= false,			///< Draw the center of mass for each body
-		.mDrawWorldTransform		= false,			///< Draw the world transform (which can be different than the center of mass) for each body
-		.mDrawVelocity				= false,			///< Draw the velocity vector for each body
-		.mDrawMassAndInertia		= false,			///< Draw the mass and inertia (as the box equivalent) for each body
-		.mDrawSleepStats			= false,			///< Draw stats regarding the sleeping algorithm of each body
-	};
+	drawSettings.mDrawGetSupportFunction = false;			///< Draw the GetSupport() function, used for convex collision detection	
+	drawSettings.mDrawSupportDirection = false;			///< When drawing the support function, also draw which direction mapped to a specific support point
+	drawSettings.mDrawGetSupportingFace = false;			///< Draw the faces that were found colliding during collision detection
+	drawSettings.mDrawShape = true;				///< Draw the shapes of all bodies
+	drawSettings.mDrawShapeWireframe = wireframe;		///< When mDrawShape is true and this is true, the shapes will be drawn in wireframe instead of solid.
+	drawSettings.mDrawShapeColor = GetColorMode();	///< Coloring scheme to use for shapes
+	drawSettings.mDrawBoundingBox = false;			///< Draw a bounding box per body
+	drawSettings.mDrawCenterOfMassTransform = false;			///< Draw the center of mass for each body
+	drawSettings.mDrawWorldTransform = false;			///< Draw the world transform (which can be different than the center of mass) for each body
+	drawSettings.mDrawVelocity = false;			///< Draw the velocity vector for each body
+	drawSettings.mDrawMassAndInertia = false;			///< Draw the mass and inertia (as the box equivalent) for each body
+	drawSettings.mDrawSleepStats = false;			///< Draw stats regarding the sleeping algorithm of each body
 #else
-	JPH::BodyManager::DrawSettings drawSettings
-	{
-		.mDrawGetSupportFunction	= false,			///< Draw the GetSupport() function, used for convex collision detection	
-		.mDrawSupportDirection		= false,			///< When drawing the support function, also draw which direction mapped to a specific support point
-		.mDrawGetSupportingFace		= false,			///< Draw the faces that were found colliding during collision detection
-		.mDrawShape					= false,			///< Draw the shapes of all bodies
-		.mDrawShapeWireframe		= false,			///< When mDrawShape is true and this is true, the shapes will be drawn in wireframe instead of solid.
-		.mDrawBoundingBox			= true,				///< Draw a bounding box per body
-		.mDrawCenterOfMassTransform	= false,			///< Draw the center of mass for each body
-		.mDrawWorldTransform		= false,			///< Draw the world transform (which can be different than the center of mass) for each body
-		.mDrawVelocity				= true,				///< Draw the velocity vector for each body
-		.mDrawMassAndInertia		= false,			///< Draw the mass and inertia (as the box equivalent) for each body
-		.mDrawSleepStats			= false,			///< Draw stats regarding the sleeping algorithm of each body
-	};
+	drawSettings.mDrawGetSupportFunction = false;			///< Draw the GetSupport() function, used for convex collision detection	
+	drawSettings.mDrawSupportDirection = false;			///< When drawing the support function, also draw which direction mapped to a specific support point
+	drawSettings.mDrawGetSupportingFace = false;			///< Draw the faces that were found colliding during collision detection
+	drawSettings.mDrawShape = false;			///< Draw the shapes of all bodies
+	drawSettings.mDrawShapeWireframe = false;			///< When mDrawShape is true and this is true, the shapes will be drawn in wireframe instead of solid.
+	drawSettings.mDrawBoundingBox = true;				///< Draw a bounding box per body
+	drawSettings.mDrawCenterOfMassTransform = false;			///< Draw the center of mass for each body
+	drawSettings.mDrawWorldTransform = false;			///< Draw the world transform (which can be different than the center of mass) for each body
+	drawSettings.mDrawVelocity = true;				///< Draw the velocity vector for each body
+	drawSettings.mDrawMassAndInertia = false;			///< Draw the mass and inertia (as the box equivalent) for each body
+	drawSettings.mDrawSleepStats = false;			///< Draw stats regarding the sleeping algorithm of each body
 #endif
 
 	physicsSystem.DrawBodies( drawSettings, this );

@@ -375,16 +375,16 @@ void JoltPhysicsVehicleController::CreateWheel( JPH::VehicleConstraintSettings &
 	const float wheelVolume = M_PI * wheelWidth * Cube( wheelRadius );
 
 	{
-		objectparams_t wheelParams =
-		{
-			.mass		= axle.wheels.mass,
-			.inertia	= axle.wheels.inertia,
-			.damping	= axle.wheels.damping,
-			.rotdamping	= axle.wheels.rotdamping,
-			.pName		= "VehicleWheel",
-			.pGameData	= m_pCarBodyObject->GetGameData(),
-			.volume		= wheelVolume,
-		};
+		objectparams_t wheelParams;
+
+		wheelParams.mass = axle.wheels.mass;
+		wheelParams.inertia = axle.wheels.inertia;
+		wheelParams.damping = axle.wheels.damping;
+		wheelParams.rotdamping = axle.wheels.rotdamping;
+		wheelParams.pName = "VehicleWheel";
+		wheelParams.pGameData = m_pCarBodyObject->GetGameData();
+		wheelParams.volume = wheelVolume;
+
 		IPhysicsObject *pWheelObject = m_pEnvironment->CreateSphereObject(
 			wheelRadius, axle.wheels.materialIndex,
 			wheelPositionWorld, QAngle(),
@@ -397,7 +397,9 @@ void JoltPhysicsVehicleController::CreateWheel( JPH::VehicleConstraintSettings &
 		// Josh: The wheel is a fake object, so disable collisions on it.
 		pJoltWheelObject->EnableCollisions( false );
 
-		m_Wheels.push_back( JoltPhysicsWheel{ .pObject = pJoltWheelObject } );
+		JoltPhysicsWheel obj;
+		obj.pObject = pJoltWheelObject;
+		m_Wheels.push_back( obj );
 	}
 
 	const float steeringAngle = DEG2RAD( Max( m_VehicleParams.steering.degreesSlow, m_VehicleParams.steering.degreesFast ) );

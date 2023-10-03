@@ -946,17 +946,18 @@ void JoltPhysicsCollision::DuplicateAndScale( vcollide_t *pOut, const vcollide_t
 	char *pKeyValues = new char[ pIn->descSize ];
 	V_memcpy( pKeyValues, pIn->pKeyValues, pIn->descSize );
 
-	*pOut = vcollide_t
-	{
-		.solidCount = pIn->solidCount,
-		.isPacked   = pIn->isPacked,
-		.descSize   = pIn->descSize,
-		.solids     = pSolids,
-		.pKeyValues = pKeyValues,
+	vcollide_t out;
+
+	out.solidCount = pIn->solidCount;
+	out.isPacked = pIn->isPacked;
+	out.descSize = pIn->descSize;
+	out.solids = pSolids;
+	out.pKeyValues = pKeyValues;
 #ifdef GAME_ASW_OR_NEWER
-		.pUserData  = nullptr,
+	out.pUserData = nullptr;
 #endif
-	};
+
+	* pOut = out;
 }
 
 //-------------------------------------------------------------------------------------------------

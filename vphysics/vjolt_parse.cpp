@@ -439,11 +439,10 @@ void		JoltPhysicsParseKV::ParseCollisionRules( ragdollcollisionrules_t *pRules, 
 	if ( unknownKeyHandler )
 		unknownKeyHandler->SetDefaults( pRules );
 
-	JoltPhysicsCollisionRulesHelper helper =
-	{
-		.Rules				= pRules ? *pRules : ragdollcollisionrules_t{},
-		.pUnknownKeyHandler = unknownKeyHandler,
-	};
+	JoltPhysicsCollisionRulesHelper helper;
+
+	helper.Rules = pRules ? *pRules : ragdollcollisionrules_t{};
+	helper.pUnknownKeyHandler = unknownKeyHandler;
 
 	ParseJoltKVSchema( m_pCurrentBlock, kCollisionRulesDescs, ARRAYSIZE( kCollisionRulesDescs ), &helper, pRules, unknownKeyHandler );
 

@@ -62,9 +62,6 @@ def configure(conf):
 	if conf.env.DEST_CPU == 'amd64':
 		conf.env.DEST_CPU = 'x86_64'
 
-	if conf.env.COMPILER_CC == 'msvc':
-		conf.load('msvc_pdb')
-
 	# Force XP compatibility, all build targets should add subsystem=bld.env.MSVC_SUBSYSTEM
 	if conf.env.MSVC_TARGETS[0] == 'x86':
 		conf.env.MSVC_SUBSYSTEM = 'WINDOWS,5.01'
@@ -75,19 +72,19 @@ def configure(conf):
 
 	FLAGS = {
 		'common': {
-			'msvc': ['/DEBUG'], # always create PDB, doesn't affect result binaries
+			'msvc': ['/DEBUG', '/FS', '/MP'], # always create PDB, doesn't affect result binaries
 			'default': ['-Wl,--no-undefined', '-fPIC', '-fvisibility=hidden']
 		},
 		'release': {
-			'msvc': ['/O2', '/Zi'],
+			'msvc': ['/O2', '/Zi', '/MT'],
 			'default': ['-O3', '-g'],
 		},
 		'debug': {
-			'msvc': ['/Od', '/Zi'],
+			'msvc': ['/Od', '/Zi', '/MTd'],
 			'default': ['-O0', '-g']
 		},
 		'asan': {
-			'msvc': ['/O0', '/fsanitize=address'],
+			'msvc': ['/O0', '/fsanitize=address', '/MT'],
 			'default': ['-fsanitize=address', '-pthread']
 		}
 	}
@@ -96,10 +93,20 @@ def configure(conf):
 	flags += get_flags_by_compiler(FLAGS[conf.env.CFG], conf.env.COMPILER_CC)
 
 	if conf.env.COMPILER_CC != 'msvc':
-		if not conf.env.ALLOW64:
-			flags += ['-m32'] if conf.env.DEST_OS != 'darwin' else ['-arch', 'i386']
+		if conf.env.ALLOW64:
+			if conf.env.COMPILER_CC == 'msvc':
+				flags += ['/MACHINE:X64']
+			elif conf.env.DEST_OS == 'darwin':
+				flags += ['-arch', 'x86_64']
+			else:
+				flags += ['-m64']
 		else:
-			flags += ['-m64'] if conf.env.DEST_OS != 'darwin' else ['-arch', 'x86_64']
+			if conf.env.COMPILER_CC == 'msvc':
+				flags += ['/MACHINE:X86', '/arch:SSE2']
+			elif conf.env.DEST_OS == 'darwin':
+				flags += ['-arch', 'i386']
+			else:
+				flags += ['-m32']
 
 	if conf.env.DEST_CPU in ['x86', 'x86_64'] and conf.env.COMPILER_CC != 'msvc':
 		flags += ['-march=core2', '-mtune=nocona']
@@ -111,9 +118,13 @@ def configure(conf):
 
 	defines = [
 		'CSTRIKE_REL_BUILD=1',
-		'RAD_TELEMETRY_DISABLED',
-		'NDEBUG'
+		'RAD_TELEMETRY_DISABLED'
 	]
+
+	if conf.env.CFG == 'debug':
+		defines += ['DEBUG', '_DEBUG']
+	else:
+		defines += ['NDEBUG']
 
 	if conf.env.DEST_OS == 'linux':
 		defines += [
@@ -124,6 +135,25 @@ def configure(conf):
 			'GNUC',
 			'_DLL_EXT=.so'
 		]
+	elif conf.env.DEST_OS == 'win32':
+		defines += [
+			'WIN32',
+			'_WIN32',
+			'_WINDOWS',
+			'_USRDLL',
+			'_CRT_SECURE_NO_DEPRECATE',
+			'_CRT_NONSTDC_NO_DEPRECATE',
+			'_ALLOW_RUNTIME_LIBRARY_MISMATCH',
+			'_ALLOW_ITERATOR_DEBUG_LEVEL_MISMATCH',
+			'_ALLOW_MSC_VER_MISMATCH',
+			'_HAS_STD_BYTE=0',
+			'_DLL_EXT=.dll'
+		]
+		if conf.env.ALLOW64:
+			defines += [
+				'WIN64',
+				'_WIN64'
+			]
 
 	if conf.env.ALLOW64:
 		defines += ['PLATFORM_64BITS']
@@ -156,6 +186,15 @@ def configure(conf):
 		defines += ['USE_SDL']
 		includes += [os.path.abspath('thirdparty/SDL2')]
 		conf.check_cc(lib='SDL2')
+
+	if conf.env.DEST_OS == 'win32':
+		a = [ 'user32', 'shell32', 'gdi32', 'advapi32', 'dbghelp', 'psapi', 'ws2_32' ]
+		if conf.env.COMPILER_CC == 'msvc':
+			for i in a:
+				conf.check_lib_msvc(i)
+		else:
+			for i in a:
+				conf.check_cc(lib = i)
 
 	conf.env.append_unique('CFLAGS', flags)
 	conf.env.append_unique('CXXFLAGS', cxxflags + flags)

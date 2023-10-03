@@ -1,4 +1,4 @@
-//========= Copyright © 1996-2005, Valve Corporation, All rights reserved. ============//
+//========= Copyright ?1996-2005, Valve Corporation, All rights reserved. ============//
 //
 // Purpose: 
 //
@@ -634,7 +634,7 @@ void bf_write::WriteBitCoordMP( const float f, EBitCoordType coordType )
 	bool bLowPrecision = ( coordType == kCW_LowPrecision );  
 
 	int		signbit = (f <= -( bLowPrecision ? COORD_RESOLUTION_LOWPRECISION : COORD_RESOLUTION ));
-	int		intval = (int)abs(f);
+	int		intval = abs((int)f);
 	int		fractval = bLowPrecision ? 
 		( abs((int)(f*COORD_DENOMINATOR_LOWPRECISION)) & (COORD_DENOMINATOR_LOWPRECISION-1) ) :
 		( abs((int)(f*COORD_DENOMINATOR)) & (COORD_DENOMINATOR-1) );
@@ -699,7 +699,7 @@ void bf_write::WriteBitCellCoord( const float f, int bits, EBitCoordType coordTy
 	bool bIntegral = ( coordType == kCW_Integral );
 	bool bLowPrecision = ( coordType == kCW_LowPrecision );  
 
-	int		intval = (int)abs(f);
+	int		intval = abs((int)f);
 	int		fractval = bLowPrecision ? 
 		( abs((int)(f*COORD_DENOMINATOR_LOWPRECISION)) & (COORD_DENOMINATOR_LOWPRECISION-1) ) :
 		( abs((int)(f*COORD_DENOMINATOR)) & (COORD_DENOMINATOR-1) );
@@ -722,7 +722,7 @@ void bf_write::WriteBitCoord(const float f)
 	VPROF( "bf_write::WriteBitCoord" );
 #endif
 	int		signbit = (f <= -COORD_RESOLUTION);
-	int		intval = (int)abs(f);
+	int		intval = abs((int)f);
 	int		fractval = abs((int)(f*COORD_DENOMINATOR)) & (COORD_DENOMINATOR-1);
 
 

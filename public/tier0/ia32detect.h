@@ -1,4 +1,4 @@
-//===== Copyright © 1996-2005, Valve Corporation, All rights reserved. ======//
+//===== Copyright ?1996-2005, Valve Corporation, All rights reserved. ======//
 //
 // Purpose: 
 //
@@ -11,6 +11,8 @@
 #ifdef COMPILER_MSVC64
 extern "C" void __cpuid(int* CPUInfo, int InfoType);
 #pragma intrinsic (__cpuid)
+#elif defined COMPILER_MSVC32
+#include <intrin.h>
 #endif
 /*
     This section from http://iss.cs.cornell.edu/ia32.htm

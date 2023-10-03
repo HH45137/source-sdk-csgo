@@ -31,6 +31,7 @@ JoltPhysicsObject::JoltPhysicsObject( JPH::Body *pBody, JoltPhysicsEnvironment *
 	, m_pGameData( pParams->pGameData )
 	, m_materialIndex( Max( nMaterialIndex, 0 ) ) // Sometimes we get passed -1.
 	, m_flVolume( pParams->volume )
+	, m_pName(pParams->pName)
 {
 	// Set the body's userdata as ourselves
 	pBody->SetUserData( reinterpret_cast<uint64>( this ) );
@@ -863,17 +864,16 @@ static float ComputeShadowController( JoltShadowControlParams &params, JPH::Vec3
 
 float JoltPhysicsObject::ComputeShadowControl( const hlshadowcontrol_params_t &params, float flSecondsToArrival, float flDeltaTime )
 {
-	JoltShadowControlParams joltParams =
-	{
-		.TargetPosition		= SourceToJolt::Distance( params.targetPosition ),
-		.TargetRotation		= SourceToJolt::Angle( params.targetRotation ),
-		.MaxAngular			= SourceToJolt::Angle( params.maxAngular ),
-		.MaxDampAngular		= SourceToJolt::Angle( params.maxDampAngular ),
-		.MaxSpeed			= SourceToJolt::Distance( params.maxSpeed ),
-		.MaxDampSpeed		= SourceToJolt::Distance( params.maxDampSpeed ),
-		.DampFactor			= params.dampFactor,
-		.TeleportDistance	= SourceToJolt::Distance( params.teleportDistance ),
-	};
+	JoltShadowControlParams joltParams;
+
+	joltParams.TargetPosition = SourceToJolt::Distance(params.targetPosition);
+	joltParams.TargetRotation = SourceToJolt::Angle(params.targetRotation);
+	joltParams.MaxAngular = SourceToJolt::Angle(params.maxAngular);
+	joltParams.MaxDampAngular = SourceToJolt::Angle(params.maxDampAngular);
+	joltParams.MaxSpeed = SourceToJolt::Distance(params.maxSpeed);
+	joltParams.MaxDampSpeed = SourceToJolt::Distance(params.maxDampSpeed);
+	joltParams.DampFactor = params.dampFactor;
+	joltParams.TeleportDistance = SourceToJolt::Distance(params.teleportDistance);
 
 	JPH::BodyInterface& bodyInterface = m_pPhysicsSystem->GetBodyInterfaceNoLock();
 
@@ -910,8 +910,7 @@ const CPhysCollide *JoltPhysicsObject::GetCollide() const
 
 const char *JoltPhysicsObject::GetName() const
 {
-	// Slart: Jolt used to store debug names in JPH::Body, but it was removed. So now everybody's NoName.
-	return "NoName";
+	return m_pName;
 }
 
 //-------------------------------------------------------------------------------------------------

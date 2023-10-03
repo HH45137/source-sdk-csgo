@@ -2,8 +2,10 @@
 #define THREADTOOLS_INL
 
 // This file is included in threadtools.h for PS3 and threadtools.cpp for all other platforms
-//
-// Do not #include other files here
+
+#if defined(COMPILER_MSVC)
+#include <memory>
+#endif
 
 #ifndef _PS3
 // this is defined in the .cpp for the PS3 to avoid introducing a dependency for files including the header
@@ -531,7 +533,7 @@ INLINE_ON_PS3 void* CThread::ThreadProc(LPVOID pv)
 #if defined( POSIX ) || defined( _PS3 )
 	ThreadInit_t *pInit = reinterpret_cast<ThreadInit_t*>(pv);
 #else
-	std::auto_ptr<ThreadInit_t> pInit((ThreadInit_t *)pv);
+	std::unique_ptr<ThreadInit_t> pInit((ThreadInit_t *)pv);
 #endif
 
 #ifdef _X360

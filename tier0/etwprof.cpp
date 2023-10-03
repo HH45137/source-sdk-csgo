@@ -7,7 +7,6 @@
 //===============================================================================
 
 #include "pch_tier0.h"
-#include "tier0/etwprof.h"
 
 #include <memory>
 
@@ -18,6 +17,8 @@
 //    xcopy /y %vgame%\bin\tier0.dll %temp%
 //    wevtutil um %vgame%\..\src\tier0\ValveETWProvider.man
 //    wevtutil im %vgame%\..\src\tier0\ValveETWProvider.man
+
+#include "tier0/etwprof.h"
 
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>

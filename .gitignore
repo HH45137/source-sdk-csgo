@@ -1,3 +1,5 @@
 .lock*
 build
 .waf3-*
+waf3-*
+.vs

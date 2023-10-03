@@ -501,17 +501,23 @@ void *_calloc_base( size_t nSize )
 }
 #endif
 
+#if ( defined ( _MSC_VER ) && _MSC_VER >= 1900 )
+_CRTRESTRICT
+#endif
 void *_realloc_base( void *pMem, size_t nSize )
 {
 	return ReallocUnattributed( pMem, nSize );
 }
 
-void *_recalloc_base( void *pMem, size_t nSize )
+#if ( defined ( _MSC_VER ) && _MSC_VER >= 1900 )
+_CRTRESTRICT
+#endif
+void *_recalloc_base( void *pMem, size_t nCount, size_t nSize )
 {
-	void *pMemOut = ReallocUnattributed( pMem, nSize );
+	void* pMemOut = ReallocUnattributed(pMem, nSize * nCount);
 	if (!pMem)
 	{
-		memset(pMemOut, 0, nSize);
+		memset(pMemOut, 0, nSize * nCount);
 	}
 	return pMemOut;
 }
@@ -553,7 +559,7 @@ void * __cdecl _realloc_crt(void *ptr, size_t size)
 
 void * __cdecl _recalloc_crt(void *ptr, size_t count, size_t size)
 {
-	return _recalloc_base( ptr, size * count );
+	return _recalloc_base( ptr, count, size);
 }
 
 ALLOC_CALL void * __cdecl _recalloc ( void * memblock, size_t count, size_t size )
@@ -566,7 +572,7 @@ ALLOC_CALL void * __cdecl _recalloc ( void * memblock, size_t count, size_t size
 	return pMem;
 }
 
-size_t _msize_base( void *pMem )
+size_t __cdecl _msize_base( void *pMem ) noexcept
 {
 	return g_pMemAlloc->GetSize(pMem);
 }

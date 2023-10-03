@@ -378,11 +378,6 @@ void COM_TimestampedLog( char const *fmt, ... )
 	{
 		s_bShouldLog = ( CommandLine()->CheckParm( "-profile" ) ) ? true : false;
 		s_bShouldLogToConsole = ( CommandLine()->ParmValue( "-profile", 0.0f ) != 0.0f ) ? true : false;
-		s_bShouldLogToETW = ( CommandLine()->CheckParm( "-etwprofile" ) ) ? true : false;
-		if ( s_bShouldLogToETW )
-		{
-			s_bShouldLog = true;
-		}
 		s_bChecked = true;
 	}
 	if ( !s_bShouldLog )
@@ -406,27 +401,19 @@ void COM_TimestampedLog( char const *fmt, ... )
 
 	if ( IsPC() )
 	{
-		// If ETW profiling is enabled then do it only.
-		if ( s_bShouldLogToETW )
+		if ( !s_bFirstWrite )
 		{
-			ETWMark( string );
+			unlink( "timestamped.log" );
+			s_bFirstWrite = true;
 		}
-		else
+
+		FILE* fp = fopen( "timestamped.log", "at+" );
+		fprintf( fp, "%8.4f / %8.4f:  %s\n", curStamp, curStamp - s_LastStamp, string );
+		fclose( fp );
+
+		if ( s_bShouldLogToConsole )
 		{
-			if ( !s_bFirstWrite )
-			{
-				unlink( "timestamped.log" );
-				s_bFirstWrite = true;
-			}
-
-			FILE* fp = fopen( "timestamped.log", "at+" );
-			fprintf( fp, "%8.4f / %8.4f:  %s\n", curStamp, curStamp - s_LastStamp, string );
-			fclose( fp );
-
-			if ( s_bShouldLogToConsole )
-			{
-				Msg( "%8.4f / %8.4f:  %s\n", curStamp, curStamp - s_LastStamp, string );
-			}
+			Msg( "%8.4f / %8.4f:  %s\n", curStamp, curStamp - s_LastStamp, string );
 		}
 	}
 
