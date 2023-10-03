@@ -957,7 +957,7 @@ void JoltPhysicsCollision::DuplicateAndScale( vcollide_t *pOut, const vcollide_t
 	out.pUserData = nullptr;
 #endif
 
-	* pOut = out;
+	*pOut = out;
 }
 
 //-------------------------------------------------------------------------------------------------
