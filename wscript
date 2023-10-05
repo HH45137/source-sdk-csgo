@@ -73,6 +73,7 @@ def configure(conf):
 	FLAGS = {
 		'common': {
 			'msvc': ['/DEBUG', '/FS', '/MP'], # always create PDB, doesn't affect result binaries
+			'clang' : ['-fPIC', '-fvisibility=hidden'],
 			'default': ['-Wl,--no-undefined', '-fPIC', '-fvisibility=hidden']
 		},
 		'release': {
@@ -112,9 +113,6 @@ def configure(conf):
 		flags += ['-march=core2', '-mtune=nocona']
 
 	cxxflags = ['/std:c++17'] if conf.env.COMPILER_CC == 'msvc' else ['-std=c++17'] # require c++17 support
-
-	if conf.env.COMPILER_CC == 'clang' and conf.env.CFG == 'asan':
-		linkflags.remove('-Wl,--no-undefined')
 
 	defines = [
 		'CSTRIKE_REL_BUILD=1',
@@ -204,9 +202,9 @@ def configure(conf):
 
 	if conf.env.COMPILER_CC != 'msvc':
 		opt_flags = [
-			'-Wall',
-			'-fdiagnostics-color=always'
+			'-Wall'
 		]
+		opt_flags += ['-fcolor-diagnostics'] if conf.env.COMPILER_CC == 'clang' else ['-fdiagnostics-color=always']
 		conf.env.append_unique('CFLAGS', opt_flags)
 		conf.env.append_unique('CXXFLAGS', opt_flags)
 
