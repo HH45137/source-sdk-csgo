@@ -11,6 +11,7 @@ default_prefix = '../game' # Waf uses it to set default prefix
 Context.Context.line_just = 55 # should fit for everything on 80x26
 
 SubProjects = [
+	'appframework',
 	'interfaces',
 	'mathlib',
 	'mathlib/extended',
