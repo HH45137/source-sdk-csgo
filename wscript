@@ -77,9 +77,13 @@ def configure(conf):
 			'clang' : ['-fPIC', '-fvisibility=hidden'],
 			'default': ['-Wl,--no-undefined', '-fPIC', '-fvisibility=hidden']
 		},
+		'lto': {
+			'msvc': ['/O2', '/LTCG', '/Zi', '/MT'],
+			'default': ['-O3', '-flto', '-g']
+		},
 		'release': {
 			'msvc': ['/O2', '/Zi', '/MT'],
-			'default': ['-O3', '-g'],
+			'default': ['-O3', '-g']
 		},
 		'debug': {
 			'msvc': ['/Od', '/Zi', '/MTd'],
