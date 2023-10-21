@@ -12,6 +12,7 @@ Context.Context.line_just = 55 # should fit for everything on 80x26
 
 SubProjects = [
 	'appframework',
+	'bitmap',
 	'interfaces',
 	'mathlib',
 	'mathlib/extended',
