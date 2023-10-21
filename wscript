@@ -20,6 +20,7 @@ SubProjects = [
 	'tier1',
 	'tier2',
 	'tier3',
+	'togl',
 	'vphysics',
 	'vstdlib'
 ]

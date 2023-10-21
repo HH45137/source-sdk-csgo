@@ -2126,7 +2126,7 @@ void GLMContext::Clear( bool color, unsigned long colorValue, bool depth, float 
 
 		// stencil write mask must be saved and restored
 		GLStencilWriteMask_t			oldstenmask;
-		GLStencilWriteMask_t			newstenmask = { 0xFFFFFFFF };
+		GLStencilWriteMask_t			newstenmask = { (int)0xFFFFFFFF };
 		
 		GLColorMaskSingle_t		oldcolormask;
 		GLColorMaskSingle_t		newcolormask = { -1,-1,-1,-1 };	// D3D clears do not honor color mask, so force it
