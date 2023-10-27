@@ -13,6 +13,7 @@ Context.Context.line_just = 55 # should fit for everything on 80x26
 SubProjects = [
 	'appframework',
 	'bitmap',
+	'bonesetup',
 	'interfaces',
 	'mathlib',
 	'mathlib/extended',
@@ -81,6 +82,7 @@ def configure(conf):
 		},
 		'lto': {
 			'msvc': ['/O2', '/LTCG', '/Zi', '/MT'],
+			'gcc': ['-O3', '-flto=auto', '-g'],
 			'default': ['-O3', '-flto', '-g']
 		},
 		'release': {
