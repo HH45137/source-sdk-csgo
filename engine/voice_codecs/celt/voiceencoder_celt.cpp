@@ -41,11 +41,6 @@ damage. */
 #include "ivoicecodec.h"
 #include "iframeencoder.h"
 
-#ifdef POSIX
-#include "source/osx/config.h"
-#else
-#include "source/msvc/config.h"
-#endif
 #include <stdio.h>
 #include "celt.h"
 

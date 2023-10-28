@@ -14,6 +14,8 @@ SubProjects = [
 	'appframework',
 	'bitmap',
 	'bonesetup',
+	'engine/voice_codecs/celt',
+	'engine/voice_codecs/celt/source',
 	'engine/voice_codecs/minimp3',
 	'interfaces',
 	'mathlib',
