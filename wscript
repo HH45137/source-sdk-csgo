@@ -17,6 +17,8 @@ SubProjects = [
 	'engine/voice_codecs/celt',
 	'engine/voice_codecs/celt/source',
 	'engine/voice_codecs/minimp3',
+	'engine/voice_codecs/speex',
+	'engine/voice_codecs/speex/source',
 	'interfaces',
 	'mathlib',
 	'mathlib/extended',

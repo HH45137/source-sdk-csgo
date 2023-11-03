@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+
+def options(opt):
+	return
+
+def configure(conf):
+	conf.env.append_unique('DEFINES', [])
+
+def build(bld):
+	source = [
+		'libspeex/nb_celp.c',
+		'libspeex/sb_celp.c',
+		'libspeex/lpc.c',
+		'libspeex/ltp.c',
+		'libspeex/lsp.c',
+		'libspeex/quant_lsp.c',
+		'libspeex/lsp_tables_nb.c',
+		'libspeex/gain_table.c',
+		'libspeex/gain_table_lbr.c',
+		'libspeex/cb_search.c',
+		'libspeex/filters.c',
+		'libspeex/bits.c',
+		'libspeex/modes.c',
+		'libspeex/vq.c',
+		'libspeex/high_lsp_tables.c',
+		'libspeex/vbr.c',
+		'libspeex/hexc_table.c',
+		'libspeex/exc_5_256_table.c',
+		'libspeex/exc_5_64_table.c',
+		'libspeex/exc_8_128_table.c',
+		'libspeex/exc_10_32_table.c',
+		'libspeex/exc_10_16_table.c',
+		'libspeex/exc_20_32_table.c',
+		'libspeex/hexc_10_32_table.c',
+		'libspeex/misc.c',
+		'libspeex/speex_header.c',
+		'libspeex/speex_callbacks.c',
+		'libspeex/math_approx.c',
+		'libspeex/stereo.c'
+	]
+
+	includes = []
+
+	libs = []
+
+	bld.stlib(
+		target = 'speex',
+		features = 'c cxx',
+		source = source,
+		includes = includes,
+		use = libs,
+		subsystem = bld.env.MSVC_SUBSYSTEM
+	)

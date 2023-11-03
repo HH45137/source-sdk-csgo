@@ -39,8 +39,11 @@ out of the use of this software, even if advised of the possibility of such
 damage. */
 
 #include "ivoicecodec.h"
-#include "VoiceEncoder_Speex.h"
+#include "iframeencoder.h"
+
 #include <stdio.h>
+#include "speex.h"
+
 
 // NOTE: This has to be the last file included!
 #include "tier0/memdbgon.h"
@@ -61,6 +64,31 @@ const int ENCODED_FRAME_SIZE [11] = {6,6,15,15,20,20,28,28,38,38,38};
 	Quality 6 : 28 bytes/frame, 11200bps
 	Quality 8 : 38 bytes/frame, 15200bps */
 
+class VoiceEncoder_Speex : public IFrameEncoder
+{
+public:
+	VoiceEncoder_Speex();
+	virtual ~VoiceEncoder_Speex();
+
+	// Interfaces IFrameDecoder
+
+	bool Init(int quality, int &rawFrameSize, int &encodedFrameSize);
+	void Release();
+	void DecodeFrame(const char *pCompressed, char *pDecompressedBytes);
+	void EncodeFrame(const char *pUncompressedBytes, char *pCompressed);
+	bool ResetState();
+
+private:
+
+	bool	InitStates();
+	void	TermStates();
+
+	int			m_Quality;		// voice codec quality ( 0,2,4,6,8 )
+	void *		m_EncoderState;	// speex internal encoder state
+	void *		m_DecoderState; // speex internal decoder state
+
+	SpeexBits	m_Bits;	// helpful bit buffer structure
+};
 
 extern IVoiceCodec* CreateVoiceCodec_Frame(IFrameEncoder *pEncoder);
 
