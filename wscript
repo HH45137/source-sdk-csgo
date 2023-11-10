@@ -23,6 +23,7 @@ SubProjects = [
 	'mathlib',
 	'mathlib/extended',
 	'thirdparty/JoltPhysics',
+	'thirdparty/protobuf-3.18.3',
 	'thirdparty/quickhull',
 	'tier0',
 	'tier1',
