@@ -171,7 +171,7 @@
 
 
 // dummy schema data: workaround for a build dependency issue
-schema struct RnDummy_t  
+vschema struct RnDummy_t  
 {
 	int32 m_nDummy;
 };

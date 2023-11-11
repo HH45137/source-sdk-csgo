@@ -1,0 +1,65 @@
+#!/usr/bin/env python
+
+def options(opt):
+	return
+
+def configure(conf):
+	return
+
+def build(bld):
+	source = [
+		'gcclient.cpp',
+		'gcconstants.cpp',
+		'gclogger.cpp',
+		'gcmsg.cpp',
+		'job.cpp',
+		'jobmgr.cpp',
+		'jobtime.cpp',
+		'messagelist.cpp',
+		'msgprotobuf.cpp',
+		'netpacket.cpp',
+		'netpacketpool.cpp',
+		'protobufsharedobject.cpp',
+		'sharedobject.cpp',
+		'sharedobjectcache.cpp',
+		'gcclient_sharedobjectcache.cpp',
+		'steamextra/misc.cpp',
+		'steamextra/rtime.cpp',
+		'steamextra/steamid.cpp',
+		'steamextra/tier1/hashglobals.cpp',
+		'steamextra/tier1/tsmempool.cpp',
+		'steamextra/tier1/tsmultimempool.cpp',
+		'workthreadpool.cpp',
+		'webapi_response.cpp',
+		'../thirdparty/JSON_parser/JSON_parser.c',
+		'../public/tier0/memoverride.cpp'
+	]
+
+	includes = [
+		'steamextra',
+		'../public',
+		'../public/tier0',
+		'../public/gcsdk',
+		'../common',
+		'../generated_proto',
+		'../thirdparty/protobuf-3.18.3/src'
+	]
+
+	libs = [
+		'tier0',
+		'tier1',
+		'interfaces',
+		'vstdlib',
+		'generated_proto',
+		'protobuf'
+	]
+
+	bld.shlib(
+		target = 'gcsdk',
+		features = 'c cxx',
+		source = source,
+		includes = includes,
+		use = libs,
+		install_path = bld.env.LIBDIR,
+		subsystem = bld.env.MSVC_SUBSYSTEM
+	)

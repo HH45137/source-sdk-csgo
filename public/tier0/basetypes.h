@@ -20,8 +20,8 @@
 
 //////////////////////////////////////////////////////////////////////////
 
-#ifndef schema
-#define schema namespace ValveSchemaMarker {}
+#ifndef vschema
+#define vschema namespace ValveSchemaMarker {}
 #endif
 #define noschema
 #define schema_pragma( ... )

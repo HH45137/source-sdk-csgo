@@ -19,6 +19,8 @@ SubProjects = [
 	'engine/voice_codecs/minimp3',
 	'engine/voice_codecs/speex',
 	'engine/voice_codecs/speex/source',
+	'gcsdk',
+	'generated_proto',
 	'interfaces',
 	'mathlib',
 	'mathlib/extended',
