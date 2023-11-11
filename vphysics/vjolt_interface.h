@@ -26,15 +26,15 @@ using IVJoltDebugOverlay = IVDebugOverlay;
 #endif
 
 // Call this in stubbed functions to spew when they're hit
-#if 1 // DEVELOPMENT_ONLY
-#define Log_Stub( Channel )
-#else
+#ifdef DEBUG
 #define Log_Stub( Channel ) \
 	Log_Warning( Channel, "Stub: %s\n", __FUNCTION__ )
+#else
+#define Log_Stub( Channel )
 #endif
 
 // So we can toggle assertions in this module at our discretion
-#if DEVELOPMENT_ONLY
+#if DEBUG
 #define VJoltAssert	DevAssert
 #define VJoltAssertMsg DevAssertMsg
 #else
