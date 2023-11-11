@@ -29,7 +29,11 @@ def build(bld):
 			'floatbitmap4.cpp'
 		]
 
-	includes = []
+	includes = [	
+		'../public',
+		'../public/tier0',
+		'../public/tier1'
+	]
 
 	libs = []
 

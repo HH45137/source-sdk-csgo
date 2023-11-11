@@ -16,6 +16,7 @@ def build(bld):
 	]
 
 	includes = [
+		'../../public',
 		'../../public/quickhull'
 	]
 

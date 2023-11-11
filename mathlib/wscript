@@ -33,7 +33,7 @@ def build(bld):
 		'almostequal.cpp',
 		'simplex.cpp',
 		'eigen.cpp',
-		'box_buoyancy.cpp', # doesn't compile in debug under GCC 4.2.X
+		'box_buoyancy.cpp',
 		'camera.cpp',
 		'planefit.cpp',
 		'polygon.cpp',
@@ -44,6 +44,9 @@ def build(bld):
 	]
 
 	includes = [
+		'../public',
+		'../public/tier0',
+		'../public/tier1',
 		'../public/mathlib'
 	]
 

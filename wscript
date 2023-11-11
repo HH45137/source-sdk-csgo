@@ -22,6 +22,7 @@ SubProjects = [
 	'interfaces',
 	'mathlib',
 	'mathlib/extended',
+	'thirdparty/goldberg_emulator-0.2.5',
 	'thirdparty/JoltPhysics',
 	'thirdparty/protobuf-3.18.3',
 	'thirdparty/quickhull',
@@ -183,13 +184,6 @@ def configure(conf):
 		defines += ['COMPILER_MSVC']
 		defines += ['COMPILER_MSVC64'] if conf.env.ALLOW64 else ['COMPILER_MSVC32']
 
-	includes = [
-		os.path.abspath('public'),
-		os.path.abspath('public/tier0'),
-		os.path.abspath('public/tier1'),
-		os.path.abspath('common')
-	]
-
 	if conf.env.TOGL:
 		defines += [
 			'GL_GLEXT_PROTOTYPES',
@@ -197,9 +191,9 @@ def configure(conf):
 		]
 
 	if conf.env.SDL:
-		defines += ['USE_SDL']
-		includes += [os.path.abspath('thirdparty/SDL2')]
 		conf.check_cc(lib='SDL2')
+		defines += ['USE_SDL']
+		conf.env.append_unique('INCLUDES', os.path.abspath('thirdparty/SDL2'))
 
 	if conf.env.DEST_OS == 'win32':
 		a = [ 'user32', 'shell32', 'gdi32', 'advapi32', 'dbghelp', 'psapi', 'ws2_32' ]
@@ -214,12 +208,9 @@ def configure(conf):
 	conf.env.append_unique('CXXFLAGS', cxxflags + flags)
 	conf.env.append_unique('LINKFLAGS', flags)
 	conf.env.append_unique('DEFINES', defines)
-	conf.env.append_unique('INCLUDES', includes)
 
 	if conf.env.COMPILER_CC != 'msvc':
-		opt_flags = [
-			'-Wall'
-		]
+		opt_flags = ['-Wall']
 		opt_flags += ['-fcolor-diagnostics'] if conf.env.COMPILER_CC == 'clang' else ['-fdiagnostics-color=always']
 		conf.env.append_unique('CFLAGS', opt_flags)
 		conf.env.append_unique('CXXFLAGS', opt_flags)

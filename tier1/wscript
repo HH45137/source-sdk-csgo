@@ -64,7 +64,11 @@ def build(bld):
 	if bld.env.DEST_OS == 'linux':
 		source += ['qsort_s.cpp']
 
-	includes = []
+	includes = [
+		'../public',
+		'../public/tier0',
+		'../public/tier1'
+	]
 
 	libs = []
 

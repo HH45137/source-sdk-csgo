@@ -42,10 +42,8 @@ public:
 	CUtlBinaryBlock( const CUtlBinaryBlock& src );
 	CUtlBinaryBlock &operator=( const CUtlBinaryBlock &src );
 
-#if VALVE_CPP11
 	CUtlBinaryBlock( CUtlBinaryBlock&& src );
 	CUtlBinaryBlock &operator=( CUtlBinaryBlock&& src );
-#endif
 
 	void		Get( void *pValue, int nMaxLen ) const;
 	void		Set( const void *pValue, int nLen );
@@ -77,7 +75,6 @@ private:
 // class inlines
 //-----------------------------------------------------------------------------
 
-#if VALVE_CPP11
 inline CUtlBinaryBlock::CUtlBinaryBlock( CUtlBinaryBlock&& src )
 : m_Memory( Move(src.m_Memory) )
 , m_nActualLength( src.m_nActualLength )
@@ -95,7 +92,6 @@ inline CUtlBinaryBlock& CUtlBinaryBlock::operator= ( CUtlBinaryBlock&& src )
 
 	return *this;
 }
-#endif
 
 inline const void *CUtlBinaryBlock::Get( ) const
 {
@@ -163,10 +159,8 @@ public:
 	CUtlString( const CUtlString& string ); // = default;
 	CUtlString &operator=( const CUtlString &src ); // = default;
 
-#if VALVE_CPP11
 	CUtlString( CUtlString&& moveFrom );    // = default;
 	CUtlString &operator=( CUtlString&& moveFrom ); // = default;
-#endif
 
 	// Also can assign from a regular C-style string
 	CUtlString &operator=( const char *src );
@@ -362,7 +356,6 @@ private:
 // Inline methods
 //-----------------------------------------------------------------------------
 
-#if VALVE_CPP11
 inline CUtlString::CUtlString( CUtlString&& moveFrom )
 : m_Storage( Move( moveFrom.m_Storage ) )
 {
@@ -373,7 +366,6 @@ inline CUtlString& CUtlString::operator=( CUtlString&& moveFrom )
 	m_Storage = Move( moveFrom.m_Storage );
 	return *this;
 }
-#endif
 
 inline bool CUtlString::IsEmpty() const
 {

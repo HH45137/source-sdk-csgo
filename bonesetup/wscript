@@ -15,7 +15,11 @@ def build(bld):
 		'bone_constraints.cpp'
 	]
 
-	includes = []
+	includes = [
+		'../public',
+		'../public/tier0',
+		'../public/tier1'
+	]
 
 	libs = []
 

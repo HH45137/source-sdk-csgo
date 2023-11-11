@@ -62,7 +62,11 @@ def build(bld):
 			'pme_posix.cpp'
 		]
 
-	includes = []
+	includes = [
+		'../public',
+		'../public/tier0',
+		'../public/tier1'
+	]
 
 	libs = []
 

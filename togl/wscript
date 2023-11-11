@@ -30,7 +30,12 @@ def build(bld):
 			'mach_override.c'
 		]
 
-	includes = []
+	includes = [
+		'../public',
+		'../public/tier0',
+		'../public/tier1',
+		'../common'
+	]
 
 	libs = [
 		'tier0',

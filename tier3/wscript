@@ -15,7 +15,11 @@ def build(bld):
 		'studiohdrstub.cpp'
 	]
 
-	includes = []
+	includes = [
+		'../public',
+		'../public/tier0',
+		'../public/tier1'
+	]
 
 	libs = []
 

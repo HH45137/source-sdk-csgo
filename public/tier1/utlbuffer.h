@@ -178,12 +178,10 @@ public:
 	CUtlBuffer( const CUtlBuffer& ); // = delete;
 	CUtlBuffer& operator= ( const CUtlBuffer& ); // = delete;
 
-#if VALVE_CPP11
 	// UtlBuffer is non-copyable (same as CUtlMemory), but it is moveable.  We would like to declare these with '= default'
 	// but unfortunately VS2013 isn't fully C++11 compliant, so we have to manually declare these in the boilerplate way.
 	CUtlBuffer( CUtlBuffer&& moveFrom ); // = default;
 	CUtlBuffer& operator= ( CUtlBuffer&& moveFrom ); // = default;
-#endif
 
 	unsigned char	GetFlags() const;
 

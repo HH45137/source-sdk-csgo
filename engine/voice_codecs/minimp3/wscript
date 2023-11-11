@@ -12,7 +12,9 @@ def build(bld):
 		'../../../public/tier0/memoverride.cpp'
 	]
 
-	includes = []
+	includes = [
+		'../../../public'
+	]
 
 	libs = [
 		'tier0',

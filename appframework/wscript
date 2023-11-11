@@ -27,7 +27,12 @@ def build(bld):
 	if bld.env.DEST_OS == 'darwin':
 		source += ['glmrendererinfo_osx.mm'] if bld.env.SDL else ['cocoamgr.mm']
 
-	includes = []
+	includes = [
+		'../public',
+		'../public/tier0',
+		'../public/tier1',
+		'../common'
+	]
 
 	libs = []
 

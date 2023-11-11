@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+
+def options(opt):
+	return
+
+def configure(conf):
+	if conf.env.CFG != 'debug':
+		conf.env.append_unique('DEFINES', ['EMU_RELEASE_BUILD'])
+
+def build(bld):
+	source = [
+		'dll/base.cpp',
+		'dll/item_db_loader.cpp',
+		'dll/settings.cpp',
+		'dll/steam_client.cpp',
+		'dll/steam_http.cpp',
+		'dll/steam_musicremote.cpp',
+		'dll/steam_video.cpp',
+		'dll/dll.cpp',
+		'dll/local_storage.cpp',
+		'dll/steam_applist.cpp',
+		'dll/steam_gameserver.cpp',
+		'dll/steam_matchmaking_servers.cpp',
+		'dll/steam_parental.cpp',
+		'dll/flat.cpp',
+		'dll/network.cpp',
+		'dll/steam_apps.cpp',
+		'dll/steam_gameserverstats.cpp',
+		'dll/steam_music.cpp',
+		'dll/steam_screenshots.cpp',
+		'dll/net.pb.cc',
+		'../../public/tier0/memoverride.cpp'
+	]
+
+	includes = [
+		'../../public',
+		'../protobuf-3.18.3/src'
+	]
+
+	libs = [
+		'protobuf',
+		'tier0'
+	]
+
+	bld.shlib(
+		target = 'steam_api',
+		features = 'c cxx',
+		source = source,
+		includes = includes,
+		use = libs,
+		install_path = bld.env.LIBDIR,
+		subsystem = bld.env.MSVC_SUBSYSTEM
+	)

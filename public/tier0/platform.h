@@ -2061,9 +2061,7 @@ public:
 //-----------------------------------------------------------------------------
 // C++11 helpers
 //-----------------------------------------------------------------------------
-#define VALVE_CPP11 1
 
-#if VALVE_CPP11
 template <class T> struct C11RemoveReference { typedef T Type; };
 template <class T> struct C11RemoveReference<T&> { typedef T Type;  };
 template <class T> struct C11RemoveReference<T&&> { typedef T Type;  };
@@ -2085,7 +2083,6 @@ inline T&& Forward( typename C11RemoveReference<T>::Type&& obj )
 {
 	return static_cast< T&& >( obj );
 }
-#endif
 
 //-----------------------------------------------------------------------------
 // Methods to invoke the constructor, copy constructor, and destructor

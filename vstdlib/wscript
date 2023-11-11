@@ -25,7 +25,11 @@ def build(bld):
 		if bld.env.ALLOW64:
 			source += ['getstackptr64.masm']
 
-	includes = []
+	includes = [
+		'../public',
+		'../public/tier0',
+		'../public/tier1'
+	]
 
 	libs = [
 		'tier0',

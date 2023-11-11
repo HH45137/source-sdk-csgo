@@ -11,7 +11,9 @@ def build(bld):
 		'interfaces.cpp'
 	]
 
-	includes = []
+	includes = [
+		'../public'
+	]
 
 	libs = []
 
