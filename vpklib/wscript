@@ -11,7 +11,10 @@ def build(bld):
 		'packedstore.cpp'
 	]
 
-	includes = []
+	includes = [
+		'../public',
+		'../public/tier1'
+	]
 
 	libs = []
 

@@ -25,7 +25,10 @@ def build(bld):
 		]
 
 	includes = [
-		'../public'
+		'../public',
+		'../public/tier0',
+		'../public/tier1',
+		'../common'
 	]
 
 	libs = [

@@ -19,6 +19,7 @@ SubProjects = [
 	'engine/voice_codecs/minimp3',
 	'engine/voice_codecs/speex',
 	'engine/voice_codecs/speex/source',
+	'filesystem',
 	'gcsdk',
 	'generated_proto',
 	'interfaces',
@@ -34,6 +35,7 @@ SubProjects = [
 	'tier3',
 	'togl',
 	'vphysics',
+	'vpklib',
 	'vstdlib'
 ]
 
