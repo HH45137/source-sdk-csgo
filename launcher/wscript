@@ -22,12 +22,15 @@ def build(bld):
 
 	libs = [
 		'tier0',
+		'appframework',
 		'tier1',
 		'tier2',
+		'tier3',
 		'interfaces',
 		'vstdlib',
 		'togl',
-		'appframework'
+		'SDL2',
+		'steam_api'
 	]
 
 	bld.shlib(

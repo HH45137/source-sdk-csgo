@@ -51,7 +51,8 @@ def build(bld):
 		'interfaces',
 		'vstdlib',
 		'generated_proto',
-		'protobuf'
+		'protobuf',
+		'steam_api'
 	]
 
 	bld.shlib(
