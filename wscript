@@ -23,6 +23,8 @@ SubProjects = [
 	'gcsdk',
 	'generated_proto',
 	'interfaces',
+	'launcher',
+	'launcher_main',
 	'mathlib',
 	'mathlib/extended',
 	'thirdparty/goldberg_emulator-0.2.5',
