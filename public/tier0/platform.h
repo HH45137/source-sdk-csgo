@@ -686,7 +686,7 @@ typedef void * HINSTANCE;
 #define VALVE_RAND_MAX 0x7fff
 
 // Maximum and minimum representable values
-#ifndef PLATFORM_OSX
+#ifdef COMPILER_MSVC
 
 #if _MSC_VER >= 1800 // VS 2013 or higher
 	// Copied from stdint.h
@@ -724,7 +724,7 @@ typedef void * HINSTANCE;
 #define  UINT32_MIN			0
 #define  UINT64_MIN			0
 
-#endif // PLATFORM_OSX
+#endif // COMPILER_MSVC
 
 #ifndef  UINT_MIN
 #define  UINT_MIN			UINT32_MIN
@@ -733,16 +733,9 @@ typedef void * HINSTANCE;
 #define  FLOAT32_MAX		FLT_MAX
 #define  FLOAT64_MAX		DBL_MAX
 
-#ifdef GNUC
-#undef offsetof
-// Note: can't use builtin offsetof because many use cases (esp. in templates) wouldn't compile due to restrictions on the builtin offsetof
-//#define offsetof( type, var ) __builtin_offsetof( type, var ) 
-#define offsetof(s,m)	( (size_t)&(((s *)0x1000000)->m) - 0x1000000u )
-#else
 #include <stddef.h>
 #undef offsetof
 #define offsetof(s,m)	(size_t)&(((s *)0)->m)
-#endif
 
 
 #define  FLOAT32_MIN		FLT_MIN

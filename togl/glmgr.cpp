@@ -2118,7 +2118,7 @@ void GLMContext::Clear( bool color, unsigned long colorValue, bool depth, float 
 
 		GLClearColor_t clearcol;
 		GLClearDepth_t cleardep = { depthValue };
-		GLClearStencil_t clearsten = { stencilValue };
+		GLClearStencil_t clearsten = { (int)stencilValue };
 
 		// depth write mask must be saved&restored
 		GLDepthMask_t			olddepthmask;
@@ -6015,7 +6015,7 @@ void GLMTester::Test2( void )
 	for( int i=0; i<m_params.m_frameCount; i++)
 	{
 		// ramping shades of blue...
-		GLfloat clear_color[4] = { 0.50f, 0.05f, ((float)(i%100)) / 100.0, 1.0f };		
+		GLfloat clear_color[4] = { 0.50f, 0.05f, (float)((i%100) / 100.0), 1.0f };		
 		gGL->glClearColor(clear_color[0], clear_color[1], clear_color[2], clear_color[3]);
 		CheckGLError("test2 clear color");
 

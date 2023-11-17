@@ -34,13 +34,8 @@ using IVJoltDebugOverlay = IVDebugOverlay;
 #endif
 
 // So we can toggle assertions in this module at our discretion
-#if DEBUG
-#define VJoltAssert	DevAssert
-#define VJoltAssertMsg DevAssertMsg
-#else
 #define VJoltAssert Assert
 #define VJoltAssertMsg AssertMsg
-#endif
 
 DECLARE_LOGGING_CHANNEL( LOG_VJolt );			// For our vphysics_jolt code
 DECLARE_LOGGING_CHANNEL( LOG_JoltInternal );	// For Jolt's traces/assertions. Do NOT use for our code.

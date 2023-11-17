@@ -34,7 +34,7 @@ def build(bld):
 
 	includes = [
 		'../../public',
-		'../protobuf-3.18.3/src'
+		'../protobuf-3.2.0/src'
 	]
 
 	libs = [

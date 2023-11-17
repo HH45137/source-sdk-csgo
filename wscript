@@ -26,7 +26,7 @@ SubProjects = [
 	'mathlib/extended',
 	'thirdparty/goldberg_emulator-0.2.5',
 	'thirdparty/JoltPhysics',
-	'thirdparty/protobuf-3.18.3',
+	'thirdparty/protobuf-3.2.0/src',
 	'thirdparty/quickhull',
 	'tier0',
 	'tier1',

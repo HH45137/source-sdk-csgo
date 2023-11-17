@@ -42,7 +42,7 @@ def build(bld):
 		'../public/gcsdk',
 		'../common',
 		'../generated_proto',
-		'../thirdparty/protobuf-3.18.3/src'
+		'../thirdparty/protobuf-3.2.0/src'
 	]
 
 	libs = [
