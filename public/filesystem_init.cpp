@@ -421,19 +421,6 @@ bool FileSystem_GetExecutableDir( char *exedir, int exeDirLen )
 	{
 		Q_strncat( exedir, CORRECT_PATH_SEPARATOR_S, exeDirLen, COPY_ALL_CHARACTERS );
 		Q_strncat( exedir, "bin", exeDirLen, COPY_ALL_CHARACTERS );
-
-		#ifdef PLATFORM_64BITS
-			#ifdef _WIN64
-				const char *pPlatPath = "x64";
-			#elif OSX
-				const char *pPlatPath = "osx64";
-			#elif LINUX
-				const char *pPlatPath = "linux64";
-			#endif
-
-			Q_strncat( exedir, CORRECT_PATH_SEPARATOR_S, exeDirLen, COPY_ALL_CHARACTERS );
-			Q_strncat( exedir, pPlatPath, exeDirLen, COPY_ALL_CHARACTERS );
-		#endif
 		Q_FixSlashes( exedir );
 	}
 	
@@ -1422,8 +1409,10 @@ FSReturnCode_t FileSystem_GetFileSystemDLLName( char *pFileSystemDLL, int nMaxLe
 	
 #if defined( _PS3 )
 	Q_snprintf( pFileSystemDLL, nMaxLen, "%s%cfilesystem_stdio" DLL_EXT_STRING, g_pPS3PathInfo->PrxPath(), CORRECT_PATH_SEPARATOR );
-#else
+#elif defined( _WIN32 )
 	Q_snprintf( pFileSystemDLL, nMaxLen, "%s%cfilesystem_stdio" DLL_EXT_STRING, executablePath, CORRECT_PATH_SEPARATOR );
+#else
+	Q_snprintf( pFileSystemDLL, nMaxLen, "%s%clibfilesystem_stdio" DLL_EXT_STRING, executablePath, CORRECT_PATH_SEPARATOR );
 #endif
 
 	return FS_OK;
