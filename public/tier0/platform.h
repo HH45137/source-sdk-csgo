@@ -1881,12 +1881,6 @@ struct CPUInformation
 
 	uint32 m_nModel;
 	uint32 m_nFeatures[ 3 ];
-	uint32 m_nL1CacheSizeKb;
-	uint32 m_nL1CacheDesc;
-	uint32 m_nL2CacheSizeKb;
-	uint32 m_nL2CacheDesc;
-	uint32 m_nL3CacheSizeKb;
-	uint32 m_nL3CacheDesc;
 
 	CPUInformation(): m_Size(0){}
 };

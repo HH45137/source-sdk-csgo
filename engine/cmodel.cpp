@@ -3089,18 +3089,11 @@ CON_COMMAND_F( occlusion_test_run, "run occlusion test", FCVAR_CHEAT )
 		return;
 	}
 	s_nOcclusionTestCollectionLock++;
-	bool bColdCache = false;
 	int nDoubleCheck = 0;
 	const CPUInformation &cpuInfo = GetCPUInformation();
-	uint32 nCacheSizeKb = Max( Max( cpuInfo.m_nL1CacheSizeKb, cpuInfo.m_nL2CacheSizeKb ), cpuInfo.m_nL3CacheSizeKb );
 	for ( int i = 2; i < args.ArgC(); ++i )
 	{
 		const char *pArg = args.Arg( i );
-		if ( !V_stricmp( pArg, "-cold" ) )
-		{
-			bColdCache = true;
-			Msg( "Will test with cold cache; flush array size %dkb; cache sizes: L1 %dKb, L2 %dKb, L3 %dKb\n", nCacheSizeKb, cpuInfo.m_nL1CacheSizeKb, cpuInfo.m_nL2CacheSizeKb , cpuInfo.m_nL3CacheSizeKb );
-		}
 		else if ( !V_stricmp( pArg, "-check" ) )
 		{
 			nDoubleCheck = 100;
@@ -3127,18 +3120,8 @@ CON_COMMAND_F( occlusion_test_run, "run occlusion test", FCVAR_CHEAT )
 	int64 nBestCase = nCpuSpeed, nWorstCase = 0, nTotalTime = 0;
 	int nBestIndex = -1,  nWorstIndex = -1;
 
-	CUtlVector< int8 > flushCache;
-	if ( bColdCache )
-		flushCache.SetCount( nCacheSizeKb * 1024 );
-
 	for ( int i = 0; i < nRecCount; ++i )
 	{
-		if ( bColdCache )
-		{
-			// flush the cache
-			flushCache.FillWithValue( i );
-		}
-
 		int64 nTimeStart = GetTimebaseRegister();
 		bool bOccluded = CM_IsFullyOccluded( pRec[ i ].p0, pRec[ i ].vExtents0, pRec[ i ].p1, pRec[ i ].vExtents1 );
 		int64 nTimeOcclusion = GetTimebaseRegister() - nTimeStart;

@@ -109,7 +109,7 @@ def configure(conf):
 		},
 		'asan': {
 			'msvc': ['/O0', '/fsanitize=address', '/MT'],
-			'default': ['-fsanitize=address', '-pthread']
+			'default': ['-O0', '-fsanitize=address', '-pthread']
 		}
 	}
 
