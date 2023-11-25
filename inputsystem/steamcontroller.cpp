@@ -26,7 +26,7 @@ bool CInputSystem::InitializeSteamControllers()
 	{
 		s_bSteamControllerInitAttempted = true;
 
-		SteamAPI_InitSafe();
+		SteamAPI_Init();
 		s_SteamAPIContext.Init();
 
 		if( s_SteamAPIContext.SteamController() )

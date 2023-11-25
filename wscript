@@ -24,6 +24,7 @@ SubProjects = [
 	'filesystem',
 	'gcsdk',
 	'generated_proto',
+	'inputsystem',
 	'interfaces',
 	'launcher',
 	'launcher_main',
