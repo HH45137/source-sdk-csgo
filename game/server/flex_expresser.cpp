@@ -8,24 +8,6 @@
 #include "animation.h"
 #include "flex_expresser.h"
 #include "entitylist.h"
-/*
-#include "filesystem.h"
-#include "studio.h"
-#include "choreoevent.h"
-#include "choreoscene.h"
-#include "choreoactor.h"
-#include "vstdlib/random.h"
-#include "engine/IEngineSound.h"
-#include "tier1/strtools.h"
-#include "keyvalues.h"
-#include "ai_basenpc.h"
-#include "ai_navigator.h"
-#include "ai_moveprobe.h"
-#include "sceneentity.h"
-#include "ai_baseactor.h"
-#include "datacache/imdlcache.h"
-#include "tier1/byteswap.h"
-*/
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"

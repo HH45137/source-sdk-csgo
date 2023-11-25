@@ -22,7 +22,6 @@
 #include "StatusBarIDs.h"		// For updating status bar text
 #include "ToolManager.h"
 #include "ToolPointHandle.h"
-#include "vgui/Cursor.h"
 #include "camera.h"
 
 // memdbgon must be the last include file in a .cpp file!!!

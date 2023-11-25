@@ -24,7 +24,6 @@
 #include "StatusBarIDs.h"
 #include "ToolManager.h"
 #include "hammer.h"
-#include "vgui/Cursor.h"
 #include "mapdecal.h"
 #include "RenderUtils.h"
 #include "tier0/icommandline.h"

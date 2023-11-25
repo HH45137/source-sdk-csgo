@@ -13,7 +13,7 @@
 #include "tier1/utlbuffer.h"
 #include "filesystem.h"
 #include "tier2/tier2.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include "tier0/memdbgon.h"

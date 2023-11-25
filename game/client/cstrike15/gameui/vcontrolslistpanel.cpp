@@ -13,7 +13,6 @@
 #include <vgui/IScheme.h>
 #include <vgui/ISurface.h>
 #include <vgui/IVGui.h>
-#include <vgui/Cursor.h>
 #include <keyvalues.h>
 
 

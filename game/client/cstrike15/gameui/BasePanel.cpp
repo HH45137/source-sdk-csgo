@@ -90,7 +90,7 @@ using namespace vgui;
 
 #include "tier1/utlstring.h"
 #include "steam/steam_api.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 #include "cdll_client_int.h"
 #include "gametypes.h"
 

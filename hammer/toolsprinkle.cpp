@@ -22,7 +22,6 @@
 #include "toolsprinkle.h"
 #include "ToolManager.h"
 #include "hammer.h"
-#include "vgui/Cursor.h"
 #include "Selection.h"
 #include "vstdlib/random.h"
 #include "KeyValues.h"

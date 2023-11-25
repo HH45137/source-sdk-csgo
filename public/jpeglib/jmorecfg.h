@@ -192,14 +192,14 @@ typedef unsigned int JDIMENSION;
 /* a function used only in its module: */
 #define LOCAL(type)		static type
 /* a function referenced thru EXTERNs: */
-#if defined(GNUC) && !defined(__clang__)
+#if defined(GNUC) && !defined(__clang__) && defined(__cplusplus)
 #define GLOBAL(type)		extern "C" __attribute__ ((visibility("default"))) type
 #else
 #define GLOBAL(type)		type
 #endif
 
 /* a reference to a GLOBAL function: */
-#if defined(GNUC) && !defined(__clang__)
+#if defined(GNUC) && !defined(__clang__) && defined(__cplusplus)
 #define EXTERN(type)		extern "C" type
 #else
 #define EXTERN(type)		extern type

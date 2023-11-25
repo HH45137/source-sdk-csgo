@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+
+def options(opt):
+	return
+
+def configure(conf):
+	return
+
+def build(bld):
+	source = [
+		'assetpicker.cpp',
+		'baseassetpicker.cpp',
+		'colorpickerpanel.cpp',
+		'curveeditorpanel.cpp',
+		'gamefiletreeview.cpp',
+		'manipulator.cpp',
+		'matsyscontrols.cpp',
+		'mdlpanel.cpp',
+		'mdlpicker.cpp',
+		'mdlsequencepicker.cpp',
+		'particlepicker.cpp',
+		'picker.cpp',
+		'potterywheelpanel.cpp',
+		'proceduraltexturepanel.cpp',
+		'QCGenerator.cpp',
+		'sequencepicker.cpp',
+		'sheetsequencepanel.cpp',
+		'tgapicker.cpp',
+		'tgapreviewpanel.cpp',
+		'vmtpicker.cpp',
+		'vmtpreviewpanel.cpp',
+		'vtfpicker.cpp',
+		'vtfpreviewpanel.cpp',
+		'vmtpanel.cpp'
+	]
+
+	includes = [
+		'../../public',
+		'../../public/tier0',
+		'../../public/tier1',
+		'../../common'
+	]
+
+	libs = []
+
+	bld.stlib(
+		target = 'matsys_controls',
+		features = 'c cxx',
+		source = source,
+		includes = includes,
+		use = libs,
+		subsystem = bld.env.MSVC_SUBSYSTEM
+	)

@@ -2855,8 +2855,8 @@ uint64 COcclusionInfo::s_nAssocArrayMisses = 0;
 //uint64 s_nOccluded = 0, s_nUnoccluded = 0;
 
 
-const int32 ALIGN16 g_SIMD_0101_signmask[ 4 ] ALIGN16_POST = { 0, 0x80000000, 0, 0x80000000 };
-const int32 ALIGN16 g_SIMD_0011_signmask[ 4 ] ALIGN16_POST = { 0, 0, 0x80000000, 0x80000000 };
+const int32 ALIGN16 g_SIMD_0101_signmask[ 4 ] ALIGN16_POST = { 0, (int)0x80000000, 0, (int)0x80000000 };
+const int32 ALIGN16 g_SIMD_0011_signmask[ 4 ] ALIGN16_POST = { 0, 0, (int)0x80000000, (int)0x80000000 };
 
 struct OcclusionTestRec_t
 {
@@ -3094,7 +3094,7 @@ CON_COMMAND_F( occlusion_test_run, "run occlusion test", FCVAR_CHEAT )
 	for ( int i = 2; i < args.ArgC(); ++i )
 	{
 		const char *pArg = args.Arg( i );
-		else if ( !V_stricmp( pArg, "-check" ) )
+		if ( !V_stricmp( pArg, "-check" ) )
 		{
 			nDoubleCheck = 100;
 			if ( i + 1 < args.ArgC() )

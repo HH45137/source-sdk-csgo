@@ -87,7 +87,7 @@
 #include "bspfile.h"
 #include "tier1/utldict.h"
 #include "tier1/tier1.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 #include "threadsaferefcountedobject.h"
 #include "filetracker.h"
 

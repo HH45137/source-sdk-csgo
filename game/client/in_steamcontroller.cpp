@@ -25,7 +25,6 @@
 #include "tier0/icommandline.h"
 #include "vgui/ISurface.h"
 #include "vgui_controls/Controls.h"
-#include "vgui/Cursor.h"
 #include "cdll_client_int.h"
 #include "cdll_util.h"
 #include "tier1/convar_serverbounded.h"

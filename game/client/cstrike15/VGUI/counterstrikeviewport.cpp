@@ -17,7 +17,6 @@
 #include <vgui_controls/Panel.h>
 #include <vgui/ISurface.h>
 #include <keyvalues.h>
-#include <vgui/Cursor.h>
 #include <vgui/IScheme.h>
 #include <vgui/IVGui.h>
 #include <vgui/ILocalize.h>

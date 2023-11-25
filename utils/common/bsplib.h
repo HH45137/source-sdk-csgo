@@ -19,7 +19,7 @@
 #include "utlvector.h"
 #include "utlstring.h"
 #include "utllinkedlist.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 #include "mathlib/vector4d.h"
 #ifdef ENGINE_DLL
 #include "zone.h"

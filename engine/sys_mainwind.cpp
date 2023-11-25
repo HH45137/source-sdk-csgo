@@ -412,29 +412,8 @@ void CGame::DispatchInputEvent( const InputEvent_t &event )
 	case IE_AnalogValueChanged:
 		{
 			// mouse events should go to vgui first, but joystick events should go to scaleform first
-
-			if ( event.m_nData >= JOYSTICK_FIRST_AXIS )
-			{
-				if ( g_pScaleformUI && g_pScaleformUI->HandleInputEvent( event ) )
-					break;
-
-				if ( g_pMatSystemSurface && g_pMatSystemSurface->HandleInputEvent( event ) )
-					break;
-			}
-			else
-			{
-				if ( g_pMatSystemSurface && g_pMatSystemSurface->HandleInputEvent( event ) )
-					break;
-
-#if defined( INCLUDE_SCALEFORM )
-				bool vguiActive = IsPC() && cv_vguipanel_active.GetBool();			
-			
-				// we filter input while the console is visible, to prevent scaleform from
-				//		handling anything underneath the console
-				if ( !vguiActive && g_pScaleformUI && g_pScaleformUI->HandleInputEvent( event ) )
-					break;
-#endif // INCLUDE_SCALEFORM
-			}
+			if ( g_pMatSystemSurface && g_pMatSystemSurface->HandleInputEvent( event ) )
+				break;
 
 			// Let GameUI have the next whack at events
 			if ( g_ClientDLL && g_ClientDLL->HandleGameUIEvent( event ) )

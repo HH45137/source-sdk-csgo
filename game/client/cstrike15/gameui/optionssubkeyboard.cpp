@@ -14,7 +14,6 @@
 #include "vgui_controls/ListPanel.h"
 #include "vgui_controls/QueryBox.h"
 
-#include "vgui/Cursor.h"
 #include "vgui/IVGui.h"
 #include "vgui/ISurface.h"
 #include "tier1/keyvalues.h"

@@ -39,7 +39,7 @@
 #include "studiomdl.h"
 #include "collisionmodel.h"
 #include "optimize.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 #include "studiobyteswap.h"
 #include "tier1/strtools.h"
 #include "bspflags.h"

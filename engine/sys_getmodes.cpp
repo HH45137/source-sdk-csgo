@@ -10,6 +10,10 @@
 #include "SDL_syswm.h"
 #endif
 
+#ifdef Status
+#undef Status
+#endif
+
 #if defined( _WIN32 ) && !defined( _X360 )
 #include "winlite.h"
 #elif defined(POSIX)

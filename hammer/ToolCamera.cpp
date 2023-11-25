@@ -18,7 +18,6 @@
 #include "StatusBarIDs.h"		// dvs: remove
 #include "ToolManager.h"
 #include "hammer_mathlib.h"
-#include "vgui/Cursor.h"
 #include "Selection.h"
 
 // memdbgon must be the last include file in a .cpp file!!!

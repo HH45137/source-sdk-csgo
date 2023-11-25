@@ -4962,17 +4962,6 @@ void Mix16StereoWavtype(channel_t *pChannel, portable_samplepair_t *pOutput, flo
 
 	switch ( nWavType )
 	{
-	case CHAR_HRTF:
-
-		float volumes_averaged[2];
-		volumes_averaged[0] = float((volume[0] + volume[1]) * 4 * pChannel->hrtf.lerp + volume[0] * 8 * (1.0f - pChannel->hrtf.lerp));
-		volumes_averaged[1] = float((volume[0] + volume[1]) * 4 * pChannel->hrtf.lerp + volume[1] * 8 * (1.0f - pChannel->hrtf.lerp));
-
-		if (bUseHighQualityPitch)
-			SW_Mix16Stereo_Interp(pOutput, volumes_averaged, pData, inputOffset, rateScaleFix, outCount);
-		else
-			SW_Mix16Stereo(pOutput, volumes_averaged, pData, inputOffset, rateScaleFix, outCount);
-		break;
 	case CHAR_DIRSTEREO:
 	case CHAR_DOPPLER:
 		if ( bUseHighQualityPitch )

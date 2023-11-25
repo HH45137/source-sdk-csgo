@@ -133,17 +133,7 @@ void V_RenderVGuiOnly_NoSwap()
 		   
 	pRenderContext->ClearBuffers( true, true );
 
-#if defined( INCLUDE_SCALEFORM )
-	// Render scaleform before vgui
-	pRenderContext->AdvanceAndRenderScaleformSlot( SF_FULL_SCREEN_SLOT );
-#endif
-
 	EngineVGui()->Paint( PAINT_UIPANELS );
-
-#if defined( INCLUDE_SCALEFORM )
-	// Render cursor after vgui
-	pRenderContext->AdvanceAndRenderScaleformCursor();
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -158,7 +148,6 @@ void V_RenderVGuiOnly( void )
 
 	CMatRenderContextPtr pRenderContext;
 	pRenderContext.GetFrom( materials );
-	pRenderContext->RenderScaleformSlot(SF_RESERVED_BEGINFRAME_SLOT);
 	pRenderContext.SafeRelease();
 
 	EngineVGui()->Simulate();
@@ -174,7 +163,6 @@ void V_RenderVGuiOnly( void )
 	g_EngineRenderer->FrameEnd( );
 
 	pRenderContext.GetFrom( materials );
-	pRenderContext->RenderScaleformSlot(SF_RESERVED_ENDFRAME_SLOT);
 	pRenderContext.SafeRelease();
 
 	materials->EndFrame();

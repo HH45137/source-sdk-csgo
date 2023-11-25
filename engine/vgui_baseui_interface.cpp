@@ -20,7 +20,6 @@
 #include <vgui_controls/Panel.h>
 #include <vgui_controls/EditablePanel.h>
 #include <matsys_controls/matsyscontrols.h>
-#include <vgui/Cursor.h>
 #include <vgui_controls/PHandle.h>
 #include "keys.h"
 #include "console.h"
@@ -75,7 +74,6 @@
 // vgui2 interface
 // note that GameUI project uses ..\public\vgui and ..\public\vgui_controls, not ..\utils\vgui\include
 #include <vgui/vgui.h>
-#include <vgui/Cursor.h>
 #include <keyvalues.h>
 #include <vgui/ILocalize.h>
 #include <vgui/IPanel.h>
@@ -289,7 +287,7 @@ class CStaticPanel : public Panel
 public:
 	CStaticPanel( Panel *pParent, const char *pName ) : Panel( pParent, pName )
 	{
-		SetCursor( dc_none );
+		SetCursor( vgui::dc_none );
 		SetKeyBoardInputEnabled( false );
 		SetMouseInputEnabled( false );
 	}
@@ -335,7 +333,7 @@ public:
 		SetPaintBackgroundEnabled( false );
 		SetPaintEnabled( true );
 		SetVisible( true );
-		SetCursor( dc_none );
+		SetCursor( vgui::dc_none );
 		SetMouseInputEnabled( false );
 		SetKeyBoardInputEnabled( true );
 	}
@@ -697,7 +695,7 @@ void CEngineVGui::PreparePanel( Panel *panel, int nZPos, bool bVisible /*= true*
 	panel->SetPaintBackgroundEnabled(false);
 	panel->SetPaintEnabled(false);
 	panel->SetVisible(true);
-	panel->SetCursor( dc_none );
+	panel->SetCursor( vgui::dc_none );
 	panel->SetVisible( bVisible );
 	panel->SetZPos( nZPos );
 }
@@ -1337,7 +1335,7 @@ void CEngineVGui::ActivateGameUI()
 	staticClientDLLPanel->SetVisible(false);
 	staticClientDLLPanel->SetMouseInputEnabled(false);
 
-	surface()->SetCursor( dc_arrow );
+	surface()->SetCursor( vgui::dc_arrow );
 
 	//staticGameDLLPanel->SetVisible( true );
 	//staticGameDLLPanel->SetMouseInputEnabled( true );
@@ -1871,8 +1869,6 @@ void CEngineVGui::UpdateProgressBar( float progress, const char *pDesc, bool sho
 				float timeScale = host_timescale.GetFloat() * sv.GetTimescale();
 				if ( timeScale <= 0.0f )
 					timeScale = 1.0f;
-
-				g_pScaleformUI->RunFrame( g_ClientGlobalVariables.frametime / timeScale );
 			}
 			else
 			{
@@ -1882,7 +1878,6 @@ void CEngineVGui::UpdateProgressBar( float progress, const char *pDesc, bool sho
 	}
 	else if ( bUpdated )
 	{
-		g_pScaleformUI->RunFrame( 0 );
 		// re-render vgui on screen
 		extern void V_RenderVGuiOnly();
 		V_RenderVGuiOnly();
@@ -1931,8 +1926,6 @@ void CEngineVGui::UpdateSecondaryProgressBar( float progress, const wchar_t *des
 				float timeScale = host_timescale.GetFloat() * sv.GetTimescale();
 				if ( timeScale <= 0.0f )
 					timeScale = 1.0f;
-
-				g_pScaleformUI->RunFrame( g_ClientGlobalVariables.frametime / timeScale );
 			}
 			else
 			{
@@ -1942,7 +1935,6 @@ void CEngineVGui::UpdateSecondaryProgressBar( float progress, const wchar_t *des
 	}
 	else if ( bUpdated )
 	{
-		g_pScaleformUI->RunFrame( 0 );
 		// re-render vgui on screen
 		extern void V_RenderVGuiOnly();
 		V_RenderVGuiOnly();

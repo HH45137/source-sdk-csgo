@@ -12,7 +12,6 @@
 #include <vgui_controls/MenuButton.h>
 #include <vgui_controls/Menu.h>
 #include <vgui_controls/MenuItem.h>
-#include <vgui/Cursor.h>
 #include <vgui_controls/TreeView.h>
 #include <vgui_controls/ImageList.h>
 #include <vgui/IScheme.h>

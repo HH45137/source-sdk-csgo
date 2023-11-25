@@ -20,7 +20,7 @@
 #include "vraddetailprops.h"
 #include "mathlib/halton.h"
 #include "messbuf.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 
 bool LoadStudioModel( char const* pModelName, CUtlBuffer& buf );
 

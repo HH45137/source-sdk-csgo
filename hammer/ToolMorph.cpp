@@ -24,7 +24,6 @@
 #include "StatusBarIDs.h"
 #include "hammer.h"
 #include "mathlib/vmatrix.h"
-#include "vgui/Cursor.h"
 #include "Selection.h"
 
 // memdbgon must be the last include file in a .cpp file!!!

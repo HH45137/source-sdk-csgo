@@ -32,7 +32,6 @@ enum SOSOutputType_t
 	SOS_OUT_MIXLAYER_TRIGGER,
 	SOS_OUT_SAVE_RESTORE,
 	SOS_OUT_BLOCK_START,
-	SOS_OUT_PHONON_XFADE,
 };
 struct CSosOperatorOutput_t : CSosOperator_t
 {

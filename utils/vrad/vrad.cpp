@@ -18,7 +18,7 @@
 #include "leaf_ambient_lighting.h"
 #include "tools_minidump.h"
 #include "loadcmdline.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 #include "iscratchpad3d.h"
 
 #define ALLOWDEBUGOPTIONS (0 || _DEBUG)

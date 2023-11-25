@@ -21,7 +21,6 @@
 #include "Render3D.h"
 #include "StatusBarIDs.h"		// For updating status bar text
 #include "ToolManager.h"
-#include "vgui/Cursor.h"
 
 // memdbgon must be the last include file in a .cpp file!!!
 #include <tier0/memdbgon.h>

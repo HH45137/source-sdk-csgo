@@ -1645,7 +1645,7 @@ void Host_WriteConfiguration( const int iController, const char *filename )
 
 		if ( pRemoteStorage )
 		{
-			int32 availableBytes, totalBytes = 0;
+			uint64 availableBytes, totalBytes = 0;
 			if ( pRemoteStorage->GetQuota( &totalBytes, &availableBytes ) )
 			{
 				if ( totalBytes > 0 )

@@ -18,7 +18,6 @@
 #include "resource.h"
 #include "StatusBarIDs.h"
 #include "hammer_mathlib.h"
-#include "vgui/Cursor.h"
 #include "HammerVGui.h"
 #include <VGuiMatSurface/IMatSystemSurface.h>
 #include "camera.h"

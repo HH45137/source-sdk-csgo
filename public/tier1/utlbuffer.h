@@ -17,7 +17,7 @@
 #include "unitlib/unitlib.h" // just here for tests - remove before checking in!!!
 
 #include "tier1/utlmemory.h"
-#include "tier1/byteswap.h"
+#include "tier1/tier1_byteswap.h"
 #include <stdarg.h>
 
 

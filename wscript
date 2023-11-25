@@ -14,6 +14,8 @@ SubProjects = [
 	'appframework',
 	'bitmap',
 	'bonesetup',
+	'dmxloader',
+	'engine',
 	'engine/voice_codecs/celt',
 	'engine/voice_codecs/celt/source',
 	'engine/voice_codecs/minimp3',
@@ -27,18 +29,27 @@ SubProjects = [
 	'launcher_main',
 	'mathlib',
 	'mathlib/extended',
+	'soundsystem/lowlevel',
+	'thirdparty/cryptopp-8.9.0',
 	'thirdparty/goldberg_emulator-0.2.5',
 	'thirdparty/JoltPhysics',
+	'thirdparty/jpeg-8',
 	'thirdparty/protobuf-3.2.0/src',
 	'thirdparty/quickhull',
+	'thirdparty/zlib-1.3',
 	'tier0',
 	'tier1',
 	'tier2',
 	'tier3',
 	'togl',
+	'utils/bzip2',
+	'vgui2/matsys_controls',
+	'vgui2/vgui_controls',
+	'videocfg',
 	'vphysics',
 	'vpklib',
-	'vstdlib'
+	'vstdlib',
+	'vtf'
 ]
 
 def options(opt):

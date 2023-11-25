@@ -12,7 +12,7 @@
 #include "tier0/dbg.h"
 #include "tier0/mem.h"
 #include "tier2/fileutils.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 #include "filesystem.h"
 #include "mathlib/mathlib.h"
 #include "tier1/lzmaDecoder.h"

@@ -17,8 +17,7 @@
 #include <tier0/memdbgon.h>
 
 #include "filesystem.h"
-#include "../vgui2/src/vgui_key_translation.h"
-#include "../public/input/mousecursors.h"
+#include "../src/vgui_key_translation.h"
 #undef schema
 #undef PostMessage
 #undef MessageBox
@@ -655,13 +654,13 @@ int HTML::ConvertMouseCodeToCEFCode( MouseCode code )
 	{
 	default:
 	case MOUSE_LEFT:
-		return ISteamHTMLSurface::eHTMLMouseButton_Left;
+		return eHTMLMouseButton_Left;
 
 	case MOUSE_RIGHT:
-		return ISteamHTMLSurface::eHTMLMouseButton_Right;
+		return eHTMLMouseButton_Right;
 
 	case MOUSE_MIDDLE:
-		return ISteamHTMLSurface::eHTMLMouseButton_Middle;
+		return eHTMLMouseButton_Middle;
 	}
 }
 
@@ -704,7 +703,7 @@ void HTML::OnMousePressed( MouseCode code )
 		if ( m_unBrowserHandle == INVALID_HTMLBROWSER )
 			return;
 
-		m_SteamAPIContext.SteamHTMLSurface()->MouseDown( m_unBrowserHandle, (ISteamHTMLSurface::EHTMLMouseButton)ConvertMouseCodeToCEFCode( code ) );
+		m_SteamAPIContext.SteamHTMLSurface()->MouseDown( m_unBrowserHandle, (EHTMLMouseButton)ConvertMouseCodeToCEFCode( code ) );
 	}
 
 	if ( code == MOUSE_LEFT )
@@ -752,7 +751,7 @@ void HTML::OnMouseReleased( MouseCode code )
 	if ( m_unBrowserHandle == INVALID_HTMLBROWSER )
 		return;
 
-	m_SteamAPIContext.SteamHTMLSurface()->MouseUp( m_unBrowserHandle, (ISteamHTMLSurface::EHTMLMouseButton)ConvertMouseCodeToCEFCode( code ) );
+	m_SteamAPIContext.SteamHTMLSurface()->MouseUp( m_unBrowserHandle, (EHTMLMouseButton)ConvertMouseCodeToCEFCode( code ) );
 }
 
 
@@ -804,7 +803,7 @@ void HTML::OnMouseDoublePressed( MouseCode code )
 	if ( m_unBrowserHandle == INVALID_HTMLBROWSER )
 		return;
 
-	m_SteamAPIContext.SteamHTMLSurface()->MouseDoubleClick( m_unBrowserHandle, (ISteamHTMLSurface::EHTMLMouseButton)ConvertMouseCodeToCEFCode( code ) );
+	m_SteamAPIContext.SteamHTMLSurface()->MouseDoubleClick( m_unBrowserHandle, (EHTMLMouseButton)ConvertMouseCodeToCEFCode( code ) );
 }
 
 //-----------------------------------------------------------------------------
@@ -833,13 +832,13 @@ int HTML::TranslateKeyModifiers()
 
 	int nModifierCodes = 0;
 	if ( bControl )
-		nModifierCodes |= ISteamHTMLSurface::k_eHTMLKeyModifier_CtrlDown;
+		nModifierCodes |= k_eHTMLKeyModifier_CtrlDown;
 	if ( bAlt )
-		nModifierCodes |= ISteamHTMLSurface::k_eHTMLKeyModifier_AltDown;
+		nModifierCodes |= k_eHTMLKeyModifier_AltDown;
 	if ( bShift )
-		nModifierCodes |= ISteamHTMLSurface::k_eHTMLKeyModifier_ShiftDown;
+		nModifierCodes |= k_eHTMLKeyModifier_ShiftDown;
 
-	return (ISteamHTMLSurface::EHTMLKeyModifiers)nModifierCodes;
+	return (EHTMLKeyModifiers)nModifierCodes;
 }
 
 //-----------------------------------------------------------------------------
@@ -850,7 +849,7 @@ void HTML::OnKeyTyped(wchar_t unichar)
 	if ( m_unBrowserHandle == INVALID_HTMLBROWSER )
 		return;
 
-	m_SteamAPIContext.SteamHTMLSurface()->KeyChar( m_unBrowserHandle, unichar, (ISteamHTMLSurface::EHTMLKeyModifiers)TranslateKeyModifiers() );
+	m_SteamAPIContext.SteamHTMLSurface()->KeyChar( m_unBrowserHandle, unichar, (EHTMLKeyModifiers)TranslateKeyModifiers() );
 }
 
 
@@ -929,18 +928,18 @@ int GetKeyModifiers()
 	// Any time a key is pressed reset modifier list as well
 	int nModifierCodes = 0;
 	if( vgui::input()->IsKeyDown( KEY_LCONTROL ) || vgui::input()->IsKeyDown( KEY_RCONTROL ) )
-		nModifierCodes |= ISteamHTMLSurface::k_eHTMLKeyModifier_CtrlDown;
+		nModifierCodes |= k_eHTMLKeyModifier_CtrlDown;
 
 	if( vgui::input()->IsKeyDown( KEY_LALT ) || vgui::input()->IsKeyDown( KEY_RALT ) )
-		nModifierCodes |= ISteamHTMLSurface::k_eHTMLKeyModifier_AltDown;
+		nModifierCodes |= k_eHTMLKeyModifier_AltDown;
 
 	if( vgui::input()->IsKeyDown( KEY_LSHIFT ) || vgui::input()->IsKeyDown( KEY_RSHIFT ) )
-		nModifierCodes |= ISteamHTMLSurface::k_eHTMLKeyModifier_ShiftDown;
+		nModifierCodes |= k_eHTMLKeyModifier_ShiftDown;
 
 #ifdef OSX
 	// for now pipe through the cmd-key to be like the control key so we get copy/paste
 	if( vgui::input()->IsKeyDown( KEY_LWIN ) || vgui::input()->IsKeyDown( KEY_RWIN ) )
-		nModifierCodes |= ISteamHTMLSurface::k_eHTMLKeyModifier_CtrlDown;
+		nModifierCodes |= k_eHTMLKeyModifier_CtrlDown;
 #endif
 
 	return nModifierCodes;
@@ -1012,7 +1011,7 @@ void HTML::OnKeyCodeTyped(KeyCode code)
 	if ( m_unBrowserHandle == INVALID_HTMLBROWSER )
 		return;
 
-	m_SteamAPIContext.SteamHTMLSurface()->KeyDown( m_unBrowserHandle, KeyCode_VGUIToVirtualKey( code ), (ISteamHTMLSurface::EHTMLKeyModifiers)GetKeyModifiers() );
+	m_SteamAPIContext.SteamHTMLSurface()->KeyDown( m_unBrowserHandle, KeyCode_VGUIToVirtualKey( code ), (EHTMLKeyModifiers)GetKeyModifiers() );
 }
 
 
@@ -1024,7 +1023,7 @@ void HTML::OnKeyCodeReleased(KeyCode code)
 	if ( m_unBrowserHandle == INVALID_HTMLBROWSER )
 		return;
 
-	m_SteamAPIContext.SteamHTMLSurface()->KeyUp( m_unBrowserHandle, KeyCode_VGUIToVirtualKey( code ), (ISteamHTMLSurface::EHTMLKeyModifiers)GetKeyModifiers() );
+	m_SteamAPIContext.SteamHTMLSurface()->KeyUp( m_unBrowserHandle, KeyCode_VGUIToVirtualKey( code ), (EHTMLKeyModifiers)GetKeyModifiers() );
 }
 
 
@@ -1630,8 +1629,8 @@ void HTML::BrowserPopupHTMLWindow( HTML_NewWindow_t *pCmd )
 	{
 		if (m_SteamAPIContext.SteamHTMLSurface())
 		{
-			Assert( pCmd->unNewWindow_BrowserHandle != m_unBrowserHandle );
-			m_SteamAPIContext.SteamHTMLSurface()->RemoveBrowser( pCmd->unNewWindow_BrowserHandle );
+			Assert( pCmd->unNewWindow_BrowserHandle_IGNORE != m_unBrowserHandle );
+			m_SteamAPIContext.SteamHTMLSurface()->RemoveBrowser( pCmd->unNewWindow_BrowserHandle_IGNORE );
 		}
 
 		return;
@@ -1639,7 +1638,7 @@ void HTML::BrowserPopupHTMLWindow( HTML_NewWindow_t *pCmd )
 
 	// Allow more than one popup to be active for now. For some reason, we are not getting HTML_NewWindow_t
 	// messages after trying to have more than one popup active. (Suspect that the browser is not getting destroyed on the Steam side,
-	// even though we request it via m_SteamAPIContext.SteamHTMLSurface()->RemoveBrowser( pCmd->unNewWindow_BrowserHandle )
+	// even though we request it via m_SteamAPIContext.SteamHTMLSurface()->RemoveBrowser( pCmd->unNewWindow_BrowserHandle_IGNORE )
 	/*
 	if ( gMOTDPopupWindowActive )
 	{
@@ -1650,7 +1649,7 @@ void HTML::BrowserPopupHTMLWindow( HTML_NewWindow_t *pCmd )
 
 		if ( m_SteamAPIContext.SteamHTMLSurface() )
 		{
-			m_SteamAPIContext.SteamHTMLSurface()->RemoveBrowser( pCmd->unNewWindow_BrowserHandle );
+			m_SteamAPIContext.SteamHTMLSurface()->RemoveBrowser( pCmd->unNewWindow_BrowserHandle_IGNORE );
 		}
 		return;
 	}
@@ -1667,9 +1666,9 @@ void HTML::BrowserPopupHTMLWindow( HTML_NewWindow_t *pCmd )
 	// instead of navigating to the new page in the popup
 	
 	// Create popup
-	// pCmd->unNewWindow_BrowserHandle getting removed once HTML_BrowserReady_t message received
+	// pCmd->unNewWindow_BrowserHandle_IGNORE getting removed once HTML_BrowserReady_t message received
 
-	HTMLPopup *p = new HTMLPopup( this, pCmd->unNewWindow_BrowserHandle, pCmd->pchURL, "" );
+	HTMLPopup *p = new HTMLPopup( this, pCmd->unNewWindow_BrowserHandle_IGNORE, pCmd->pchURL, "" );
 	int wide = pCmd->unWide;
 	int tall = pCmd->unTall;
 	if ( wide == 0 || tall == 0 )

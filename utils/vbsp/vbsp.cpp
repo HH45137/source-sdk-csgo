@@ -17,7 +17,7 @@
 #include "tools_minidump.h"
 #include "materialsub.h"
 #include "loadcmdline.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 #include "worldvertextransitionfixup.h"
 #include "lzma/lzma.h"
 #include "tier1/UtlBuffer.h"

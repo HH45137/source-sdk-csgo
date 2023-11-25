@@ -21,7 +21,6 @@
 #include "hud.h"
 #include "vgui/ISurface.h"
 #include "vgui_controls/Controls.h"
-#include "vgui/Cursor.h"
 #include "tier0/icommandline.h"
 #include "inputsystem/iinputsystem.h"
 #include "inputsystem/ButtonCode.h"

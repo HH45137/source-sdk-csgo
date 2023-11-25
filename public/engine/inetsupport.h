@@ -119,8 +119,6 @@ public:
 		const void *data, int length,
 		bf_write *pVoicePayload = NULL,
 		bool bUseCompression = false ) = 0;
-
-	virtual ISteamNetworkingUtils *GetSteamNetworkingUtils() = 0;
 };
 
 #define INETSUPPORT_VERSION_STRING "INETSUPPORT_003"

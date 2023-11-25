@@ -28,7 +28,7 @@
 #include "tier1/utlstring.h"
 #include "UnicodeFileHelpers.h"
 #include "tier0/icommandline.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 #include "exprevaluator.h"
 #include "iregistry.h"
 #include <vstdlib/vstrtools.h>

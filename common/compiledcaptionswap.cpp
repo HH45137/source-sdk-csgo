@@ -6,7 +6,7 @@
 //=============================================================================//
 
 #include "utlbuffer.h"
-#include "byteswap.h"
+#include "tier1_byteswap.h"
 #include "filesystem.h"
 #include "tier2/fileutils.h"
 #include "captioncompiler.h"

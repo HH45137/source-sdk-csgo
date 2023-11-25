@@ -37,7 +37,6 @@
 #include "mathlib/vector.h"
 #include "MapOverlay.h"
 #include "engine_launcher_api.h"
-#include "vgui/Cursor.h"
 #include "ToolCamera.h"
 #include "HammerVGui.h"
 // memdbgon must be the last include file in a .cpp file!!!

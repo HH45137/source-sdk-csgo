@@ -16,7 +16,6 @@
 #include "StatusBarIDs.h"
 #include "ToolBlock.h"
 #include "ToolManager.h"
-#include "vgui/Cursor.h"
 #include "Selection.h"
 
 

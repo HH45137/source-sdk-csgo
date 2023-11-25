@@ -28,7 +28,6 @@
 #include <vgui_controls/Label.h>
 #include <vgui/ISystem.h>
 #include <vgui/ISurface.h>
-#include <vgui/Cursor.h>
 #include <vgui_controls/RadioButton.h>
 #include <vgui_controls/ComboBox.h>
 #include <vgui_controls/ImagePanel.h>

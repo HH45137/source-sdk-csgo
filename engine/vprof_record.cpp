@@ -11,7 +11,7 @@
 #include "cmd.h"
 #include "filesystem_engine.h"
 #include "vprof_record.h"
-#include "tier1/byteswap.h"
+#include "tier1/tier1_byteswap.h"
 
 #ifdef VPROF_ENABLED
 

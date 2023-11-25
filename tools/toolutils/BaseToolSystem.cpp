@@ -13,7 +13,6 @@
 #include "vgui_controls/Panel.h"
 #include "vgui_controls/FileOpenDialog.h"
 #include "vgui_controls/MessageBox.h"
-#include "vgui/Cursor.h"
 #include "vgui/iinput.h"
 #include "vgui/ivgui.h"
 #include "vgui_controls/AnimationController.h"
