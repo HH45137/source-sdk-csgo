@@ -21,6 +21,7 @@
 #include <vgui_controls/Panel.h>
 #include <vgui/IVGui.h>
 #include <vgui/ISurface.h>
+#include <vgui/Cursor.h>
 #include <vgui_controls/ProgressBox.h>
 
 #include "filesystem.h"
