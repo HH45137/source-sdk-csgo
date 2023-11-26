@@ -14,6 +14,7 @@ SubProjects = [
 	'appframework',
 	'bitmap',
 	'bonesetup',
+	'datacache',
 	'dmxloader',
 	'engine',
 	'engine/voice_codecs/celt',
