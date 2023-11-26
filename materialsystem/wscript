@@ -64,7 +64,7 @@ def build(bld):
 	]
 
 	bld.shlib(
-		target = 'materalsystem',
+		target = 'materialsystem',
 		features = 'c cxx',
 		source = source,
 		includes = includes,
