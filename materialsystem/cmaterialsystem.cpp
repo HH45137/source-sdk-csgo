@@ -4406,7 +4406,6 @@ void CMaterialSystem::EndFrame( void )
 				Assert( m_QueuedRenderContexts[i].IsInitialized() );
 				m_QueuedRenderContexts[i].Shutdown();
 			}
-			g_pScaleformUI->SetSingleThreadedMode(true);
 			break;
 
 		case MATERIAL_QUEUED_SINGLE_THREADED:
@@ -4424,7 +4423,6 @@ void CMaterialSystem::EndFrame( void )
 			if ( m_ThreadMode == MATERIAL_QUEUED_SINGLE_THREADED )
 			{
 				g_pShaderAPI->SetDisallowAccess( true );
-				g_pScaleformUI->SetSingleThreadedMode(true);
 			}
 			else
 			{
@@ -4434,7 +4432,6 @@ void CMaterialSystem::EndFrame( void )
 				g_pShaderAPI->ReleaseThreadOwnership();
 				m_QueuedRenderContexts[m_iCurQueuedContext].GetCallQueueInternal()->QueueCall( g_pShaderAPI, &IShaderAPI::AcquireThreadOwnership );
 #endif
-				g_pScaleformUI->SetSingleThreadedMode(false);
 			}
 			break;
 		}

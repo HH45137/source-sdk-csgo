@@ -9,6 +9,7 @@
 #define CUSTOM_MATERIAL_H
 
 #include "materialsystem/MaterialSystemUtil.h"
+#include "materialsystem/imaterial.h"
 #include "materialsystem/icustommaterial.h"
 #include "materialsystem/icustommaterialmanager.h"
 #include "convar.h"

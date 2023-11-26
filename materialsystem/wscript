@@ -1,0 +1,74 @@
+#!/usr/bin/env python
+
+def options(opt):
+	return
+
+def configure(conf):
+	conf.env.append_unique('DEFINES', ['DEFINE_MATERIALSYSTEM_INTERFACE', 'MATERIALSYSTEM_EXPORTS'])
+	if not conf.env.TOGL:
+		conf.env.append_unique('DEFINES', ['USE_ACTUAL_DX'])
+	if conf.env.DEST_OS == 'win32':
+		conf.env.append_unique('DEFINES', ['strncpy=use_Q_strncpy_instead', '_snprintf=use_Q_snprintf_instead'])
+
+def build(bld):
+	source = [
+		'CColorCorrection.cpp',
+		'cmaterial.cpp',
+		'cmaterial_queuefriendly.cpp',
+		'CMaterialSubRect.cpp',
+		'cmaterialvar.cpp',
+		'cmatnullrendercontext.cpp',
+		'colorspace.cpp',
+		'ctexture.cpp',
+		'../public/filesystem_helpers.cpp',
+		'imagepacker.cpp',
+		'mat_stub.cpp',
+		'materialsystem_global.cpp',
+		'morph.cpp',
+		'SubdMgr.cpp',
+		'occlusionquerymgr.cpp',
+		'shadersystem.cpp',
+		'texturemanager.cpp',
+		'composite_texture.cpp',
+		'custom_material.cpp',
+		'base_visuals_data_processor.cpp',
+		'pch_materialsystem.cpp',
+		'cmaterialdict.cpp',
+		'cmaterialsystem.cpp',
+		'cmatlightmaps.cpp',
+		'cmatpaintmaps.cpp',
+		'cmatrendercontext.cpp',
+		'cmatqueuedrendercontext.cpp',
+		'../public/tier0/memoverride.cpp'
+	]
+
+	includes = [
+		'../public',
+		'../public/tier0',
+		'../public/tier1',
+		'../common'
+	]
+
+	libs = [
+		'tier0',
+		'bitmap',
+		'tier1',
+		'tier2',
+		'tier3',
+		'interfaces',
+		'vstdlib',
+		'mathlib',
+		'vtf',
+		'shaderlib',
+		'steam_api'
+	]
+
+	bld.shlib(
+		target = 'materalsystem',
+		features = 'c cxx',
+		source = source,
+		includes = includes,
+		use = libs,
+		install_path = bld.env.LIBDIR,
+		subsystem = bld.env.MSVC_SUBSYSTEM
+	)
