@@ -34,6 +34,7 @@ SubProjects = [
 	'mathlib',
 	'mathlib/extended',
 	'soundsystem/lowlevel',
+	'studiorender',
 	'thirdparty/cryptopp-8.9.0',
 	'thirdparty/goldberg_emulator-0.2.5',
 	'thirdparty/JoltPhysics',
