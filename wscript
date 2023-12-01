@@ -33,6 +33,7 @@ SubProjects = [
 	'materialsystem/shaderlib',
 	'mathlib',
 	'mathlib/extended',
+	'soundemittersystem',
 	'soundsystem/lowlevel',
 	'studiorender',
 	'thirdparty/cryptopp-8.9.0',
