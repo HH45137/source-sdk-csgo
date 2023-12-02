@@ -51,6 +51,8 @@ SubProjects = [
 	'utils/bzip2',
 	'vgui2/matsys_controls',
 	'vgui2/vgui_controls',
+	'vgui2/vgui_surfacelib',
+	'vguimatsurface',
 	'videocfg',
 	'vphysics',
 	'vpklib',

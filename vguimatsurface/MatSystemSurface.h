@@ -32,12 +32,6 @@
 #include "inputsystem/iinputstacksystem.h"
 #include "vgui/ILocalize.h"
 
-#ifdef LINUX
-#include <ft2build.h>
-#include FT_FREETYPE_H
-#endif
-
-
 using namespace vgui;
 
 class IImage;

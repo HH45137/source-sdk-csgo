@@ -619,10 +619,10 @@ int RichText::DrawString(int iFirst, int iLast, TRenderState &renderState, HFont
 		if ( i < iLast )
 			chAfter = m_TextStream[i+1];
 		float flWide = 0.0f, flabcA = 0.0f, flabcC = 0.0f;
-		surface()->GetKernedCharWidth(font, ch, chBefore, chAfter, flWide, flabcA, flabcC);
+		surface()->GetKernedCharWidth( font, ch, chBefore, chAfter, flWide, flabcA, flabcC );
 		charWide += floor( flabcA + flWide + flabcC + 0.6f );
 #else
-		charWide += surface()->GetCharacterWidth(font, ch);
+		charWide += surface()->GetCharacterWidth( font, ch );
 #endif
 	}
 
@@ -1312,11 +1312,11 @@ void RichText::RecalculateLineBreaks()
 		if ( ( i + 1 ) < m_TextStream.Count() )
 			chAfter = m_TextStream[i+1];
 		float flWide = 0.0f, flabcA = 0.0f, flabcC;
-		surface()->GetKernedCharWidth(font, ch, chBefore, chAfter, flWide, flabcA, flabcC );
-    // don't include a negative c measure, slightly over estimate the length of the string 
+		surface()->GetKernedCharWidth( font, ch, chBefore, chAfter, flWide, flabcA, flabcC );
+		// don't include a negative c measure, slightly over estimate the length of the string 
 		charWidth = floor( flabcA + flWide + ( flabcC > 0.0 ? flabcC : 0.0 ) + 0.6f );
 #else
-		charWidth = surface()->GetCharacterWidth(font, ch);
+		charWidth = surface()->GetCharacterWidth( font, ch );
 #endif
 		if (!iswcntrl(ch))
 		{

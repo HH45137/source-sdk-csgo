@@ -470,9 +470,6 @@ InitReturnVal_t CMatSystemSurface::Init( void )
 	{
 		FontManager().SetLanguage( "english" );
 	}
-#ifdef LINUX
-	FontManager().SetFontDataHelper( &CMatSystemSurface::FontDataHelper );
-#endif
 
 	// font manager needs the file system and material system for bitmap fonts
 	FontManager().SetInterfaces( g_pFullFileSystem, g_pMaterialSystem );
@@ -2278,13 +2275,10 @@ int CMatSystemSurface::ComputeTextWidth( const wchar_t *pString )
 //-----------------------------------------------------------------------------
 bool CMatSystemSurface::AddCustomFontFile( const char *fontFileName )
 {
-	if ( IsGameConsole() )
-	{
-		// custom fonts are not supported (not needed) on xbox, all .vfonts are offline converted to ttfs
-		// ttfs are mounted/handled elsewhere
-		return true;
-	}
-
+#ifdef POSIX
+	// custom fonts are not supported (not needed)
+	return true;
+#else
 	char fullPath[MAX_PATH];
 	bool bFound = false;
 	// windows needs an absolute path for ttf
@@ -2381,112 +2375,10 @@ bool CMatSystemSurface::AddCustomFontFile( const char *fontFileName )
 	return success;
 #endif
 #endif // X360
-#elif defined( _PS3 )
-	return true;
-#elif defined( OSX )
-	// Just load the font data, decrypt in memory and register for this process
-	CUtlBuffer buf;
-	if ( !g_pFullFileSystem->ReadFile( fontFileName, NULL, buf ) )
-	{
-		Msg( "Failed to load custom font file '%s'\n", fontFileName );
-		return false;
-	}
-	
-  OSStatus err;
-	ATSFontContainerRef container;
-  err = ATSFontActivateFromMemory( buf.Base(), buf.TellPut(), kATSFontContextLocal, kATSFontFormatUnspecified, NULL, kATSOptionFlagsDefault, &container );
-  if ( err != noErr && ValveFont::DecodeFont( buf ) )
-	{
-    err = ATSFontActivateFromMemory( buf.Base(), buf.TellPut(), kATSFontContextLocal, kATSFontFormatUnspecified, NULL, kATSOptionFlagsDefault, &container );
-  }
-	
-#if 0
-  if ( err == noErr )
-  {
-	 // Debug code to let you find out the name of a font we pull in from a memory buffer
-	 // Count the number of fonts that were loaded.
-	 ItemCount fontCount = 0;
-	 err = ATSFontFindFromContainer(container, kATSOptionFlagsDefault, 0,
-	 NULL, &fontCount);
-	 
-	 if (err != noErr || fontCount < 1) {
-	 return false;
-	 }
-	 
-	 // Load font from container.
-	 ATSFontRef font_ref_ats = 0;
-	 ATSFontFindFromContainer(container, kATSOptionFlagsDefault, 1,
-	 &font_ref_ats, NULL);
-	 
-	 if (!font_ref_ats) {
-	 return false;
-	 }
-	 
-	 CFStringRef name;
-	 ATSFontGetPostScriptName( font_ref_ats, kATSOptionFlagsDefault, &name );
-	 
-	 const char *font_name = CFStringGetCStringPtr( name, CFStringGetSystemEncoding());
-   printf( "loaded %s\n", font_name );
-  }
 #endif
 	return err == noErr;
-#elif defined(LINUX)
-	// Just load the font data, decrypt in memory and register for this process
-	CUtlBuffer buf;
-	if ( !g_pFullFileSystem->ReadFile( fontFileName, NULL, buf ) )
-	{
-		Msg( "Failed to load custom font file '%s'\n", fontFileName );
-		return false;
-	}
-	
-	FT_Error error;
-	FT_Face face;
-	if ( !ValveFont::DecodeFont( buf ) )
-		error = FT_New_Face( FontManager().GetFontLibraryHandle(), (const char *)fullPath, 0, &face );
-	else
-		error = FT_New_Memory_Face( FontManager().GetFontLibraryHandle(), (FT_Byte *)buf.Base(), buf.TellPut(), 0, &face );
-
-	if ( error == FT_Err_Unknown_File_Format ) 
-	{
-		return false;
-	} 
-	else if ( error ) 
-	{ 
-		return false;
-	} 
-	const char *pchFontName = FT_Get_Postscript_Name( face );
-	if ( !V_stricmp( pchFontName, "TradeGothic" ) )
-		pchFontName = "Trade Gothic";
-	if ( !V_stricmp( pchFontName, "TradeGothicBold" ) )
-		pchFontName = "Trade Gothic Bold";
-	if ( !V_stricmp( pchFontName, "Stubble-bold" ) )
-		pchFontName = "Stubble bold";
-
-	font_entry entry;
-	entry.size = buf.TellPut();
-	entry.data = buf.Detach();
-	m_FontData.Insert( pchFontName, entry );
-	FT_Done_Face ( face );
-	return true;	
-#else
-#error	
 #endif
 }
-
-#ifdef LINUX
-void *CMatSystemSurface::FontDataHelper( const char *pchFontName, int &size )
-{
-	int iIndex = m_FontData.Find( pchFontName );
-	if ( iIndex != m_FontData.InvalidIndex() )
-	{
-		size = m_FontData[ iIndex ].size;
-		return m_FontData[ iIndex ].data;
-	}
-	size = 0;
-	return NULL;
-}
-
-#endif
 
 //-----------------------------------------------------------------------------
 // Purpose: adds a bitmap font file

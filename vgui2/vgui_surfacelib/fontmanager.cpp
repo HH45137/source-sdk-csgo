@@ -44,13 +44,6 @@ CFontManager::CFontManager()
 	m_FontAmalgams.AddToTail();
 	m_Win32Fonts.EnsureCapacity( MAX_INITIAL_FONTS );
 
-#ifdef LINUX
-        FT_Error error = FT_Init_FreeType( &library ); 
-        if ( error )
-                Error( "Unable to initalize freetype library, is it installed?" );
-		pFontDataHelper = NULL;
-#endif
-
 	// setup our text locale
 	setlocale( LC_CTYPE, "" );
 	setlocale( LC_TIME, "" );
@@ -83,9 +76,6 @@ const char *CFontManager::GetLanguage()
 CFontManager::~CFontManager()
 {
 	ClearAllFonts();
-#ifdef LINUX
-        FT_Done_FreeType( library );
-#endif
 }
 
 //-----------------------------------------------------------------------------
@@ -356,28 +346,6 @@ font_t *CFontManager::CreateOrFindWin32Font(const char *windowsFontName, int tal
 		MEM_ALLOC_CREDIT();
 
 		i = m_Win32Fonts.AddToTail();
-#ifdef LINUX
-		int memSize = 0;
-		void *pchFontData = pFontDataHelper( windowsFontName, memSize );
-		if ( pchFontData )
-		{
-			m_Win32Fonts[i] = new font_t();
-			if (m_Win32Fonts[i]->CreateFromMemory( windowsFontName, pchFontData, memSize, tall, weight, blur, scanlines, flags))
-			{
-				// add to the list
-				winFont = m_Win32Fonts[i];
-			}
-			else
-			{
-				// failed to create, remove
-				delete m_Win32Fonts[i];
-				m_Win32Fonts.Remove(i);
-				return NULL;
-			}
-		}
-		else
-		{
-#endif
 		m_Win32Fonts[i] = new font_t();
 		if (m_Win32Fonts[i]->Create(windowsFontName, tall, weight, blur, scanlines, flags))
 		{
@@ -391,9 +359,6 @@ font_t *CFontManager::CreateOrFindWin32Font(const char *windowsFontName, int tal
 			m_Win32Fonts.Remove(i);
 			return NULL;
 		}
-#ifdef LINUX
-		}
-#endif
 	}
 
 	return winFont;

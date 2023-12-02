@@ -23,17 +23,9 @@ struct newChar_t
 #if defined( WIN32 ) 
 #include "Win32Font.h"
 typedef CWin32Font font_t;
-#elif defined(_PS3)
-#include "ps3font.h"
-typedef CPS3Font font_t;
-#elif defined(OSX)
-#include "osxfont.h"
-typedef COSXFont font_t;
-#elif defined(LINUX)
-#include "linuxfont.h"
-typedef CLinuxFont font_t;
 #else
-#error
+#include "stbfont.h"
+typedef CSTBFont font_t;
 #endif
 
 
