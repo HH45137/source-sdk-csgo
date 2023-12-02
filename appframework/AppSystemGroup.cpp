@@ -306,7 +306,11 @@ bool CAppSystemGroup::AddSystems( AppSystemInfo_t *pSystemList )
 		IAppSystem *pSystem = AddSystem( module, pSystemList->m_pInterfaceName );
 		if ( !pSystem )
 		{
+#ifdef _WIN32
 			Warning( "Unable to load interface %s from %s, requested from EXE.\n", pSystemList->m_pInterfaceName, pSystemList->m_pModuleName );
+#else
+			Warning( "Unable to load interface %s from lib%s, requested from EXE.\n", pSystemList->m_pInterfaceName, pSystemList->m_pModuleName );
+#endif
 			return false;
 		}
 		++pSystemList;
@@ -592,7 +596,11 @@ bool CAppSystemGroup::LoadDependentSystems()
 			IAppSystem *pSystem = AddSystem( module, pDependencies->m_pInterfaceName );
 			if ( !pSystem )
 			{
+#ifdef _WIN32
 				Warning( "Unable to load interface %s from %s (Dependency of %s)\n", pDependencies->m_pInterfaceName, pDependencies->m_pModuleName, pInterfaceName );
+#else
+				Warning( "Unable to load interface %s from lib%s (Dependency of lib%s)\n", pDependencies->m_pInterfaceName, pDependencies->m_pModuleName, pInterfaceName );
+#endif
 				return false;
 			}
 		}
