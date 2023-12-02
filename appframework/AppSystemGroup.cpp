@@ -599,7 +599,7 @@ bool CAppSystemGroup::LoadDependentSystems()
 #ifdef _WIN32
 				Warning( "Unable to load interface %s from %s (Dependency of %s)\n", pDependencies->m_pInterfaceName, pDependencies->m_pModuleName, pInterfaceName );
 #else
-				Warning( "Unable to load interface %s from lib%s (Dependency of lib%s)\n", pDependencies->m_pInterfaceName, pDependencies->m_pModuleName, pInterfaceName );
+				Warning( "Unable to load interface %s from lib%s (Dependency of %s)\n", pDependencies->m_pInterfaceName, pDependencies->m_pModuleName, pInterfaceName );
 #endif
 				return false;
 			}
