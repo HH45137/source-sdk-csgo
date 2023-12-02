@@ -1,0 +1,38 @@
+#!/usr/bin/env python
+
+def options(opt):
+	return
+
+def configure(conf):
+	conf.env.append_unique('DEFINES', ['NO_STRING_T', 'CLIENT_DLL;VECTOR'])
+
+def build(bld):
+	source = [
+	]
+
+	includes = [
+		'cstrike15',
+		'../shared',
+		'../../public',
+		'../../public/tier0',
+		'../../public/tier1'
+	]
+
+	libs = [
+		'tier0',
+		'tier1',
+		'tier2',
+		'interfaces',
+		'vstdlib',
+		'mathlib'
+	]
+
+	bld.shlib(
+		target = 'client',
+		features = 'c cxx',
+		source = source,
+		includes = includes,
+		use = libs,
+		install_path = bld.env.LIBDIR,
+		subsystem = bld.env.MSVC_SUBSYSTEM
+	)

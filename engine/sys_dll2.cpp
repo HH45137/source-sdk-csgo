@@ -2193,7 +2193,11 @@ bool CModAppSystemGroup::Create()
 
 	// loads the matchmaking.dll
 	g_pMatchmakingDllModule = g_pFileSystem->LoadModule(
-		IsServerOnly() ? ( "matchmaking_ds" DLL_EXT_STRING ) : ( "matchmaking" DLL_EXT_STRING ),
+#ifdef _WIN32
+		"matchmaking" DLL_EXT_STRING,
+#else
+		"libmatchmaking" DLL_EXT_STRING,
+#endif
 		"GAMEBIN", false );
 
 	if ( g_pMatchmakingDllModule )
@@ -2208,7 +2212,7 @@ bool CModAppSystemGroup::Create()
 				if( IsPS3() )
 					return false;
 				else
-					Sys_Error( "Could not get matchmaking.dll interface from library matchmaking" );
+					Sys_Error( "Could not get matchmaking interface from library matchmaking" );
 			}
 			
 			// matchmaking.dll wasn't loaded by the time tier2 libraries were connecting,

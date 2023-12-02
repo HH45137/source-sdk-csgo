@@ -95,6 +95,7 @@ def configure(conf):
 	conf.env.SDL		= conf.options.SDL
 	conf.env.TOGL		= conf.options.TOGL
 	conf.env.LIBDIR		= conf.env.PREFIX + '/bin'
+	conf.env.BINDIR		= conf.env.PREFIX + '/csgo/bin'
 
 	conf.env.MSVC_TARGETS = ['x86' if not conf.options.ALLOW64 else 'x64']
 
