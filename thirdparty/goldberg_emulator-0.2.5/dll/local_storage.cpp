@@ -389,28 +389,7 @@ std::string Local_Storage::get_game_settings_path()
 std::string Local_Storage::get_user_appdata_path()
 {
     std::string user_appdata_path = "SAVE";
-#if defined(STEAM_WIN32)
-    CHAR szPath[MAX_PATH] = {};
-
-    HRESULT hr = SHGetFolderPathA(NULL, CSIDL_APPDATA, NULL, 0, szPath);
-
-    if (SUCCEEDED(hr)) {
-        user_appdata_path = szPath;
-    }
-
-#else
-    /* $XDG_DATA_HOME defines the base directory relative to which user specific data files should be stored. 
-    If $XDG_DATA_HOME is either not set or empty, a default equal to $HOME/.local/share should be used. */
-    char *datadir = getenv("XDG_DATA_HOME");
-    if (datadir) {
-        user_appdata_path = datadir;
-    } else {
-        char *homedir = getenv("HOME");
-        if (homedir) {
-            user_appdata_path = std::string(homedir) + "/.local/share";
-        }
-    }
-#endif
+    user_appdata_path = ".";
     return user_appdata_path.append(PATH_SEPARATOR).append(PROGRAM_NAME).append(" Saves");
 }
 
