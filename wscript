@@ -29,6 +29,7 @@ SubProjects = [
 	'interfaces',
 	'launcher',
 	'launcher_main',
+	'localize',
 	'materialsystem',
 	'materialsystem/shaderlib',
 	'mathlib',

@@ -1,0 +1,39 @@
+#!/usr/bin/env python
+
+def options(opt):
+	return
+
+def configure(conf):
+	return
+
+def build(bld):
+	source = [
+		'localize.cpp',
+		'../public/registry.cpp',
+		'../public/UnicodeFileHelpers.cpp',
+		'../public/tier0/memoverride.cpp'
+	]
+
+	includes = [
+		'../public',
+		'../public/tier0',
+		'../public/tier1'
+	]
+
+	libs = [
+		'tier0',
+		'tier1',
+		'tier2',
+		'interfaces',
+		'vstdlib'
+	]
+
+	bld.shlib(
+		target = 'localize',
+		features = 'c cxx',
+		source = source,
+		includes = includes,
+		use = libs,
+		install_path = bld.env.LIBDIR,
+		subsystem = bld.env.MSVC_SUBSYSTEM
+	)
