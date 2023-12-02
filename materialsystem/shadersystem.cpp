@@ -322,7 +322,11 @@ void CShaderSystem::LoadAllShaderDLLs( )
 	char buf[32];
 	for ( i = dxStart; i <= dxSupportLevel; ++i )
 	{
+#if _WIN32
+		Q_snprintf( buf, sizeof( buf ), "stdshader_dx%d%s", i, DLL_EXT_STRING );
+#else
 		Q_snprintf( buf, sizeof( buf ), "libstdshader_dx%d%s", i, DLL_EXT_STRING );
+#endif
 		LoadShaderDLL( buf );
 	}
 
@@ -336,7 +340,11 @@ void CShaderSystem::LoadAllShaderDLLs( )
 	}
 	if ( pShaderName )
 	{
+#if _WIN32
+		Q_snprintf( buf, sizeof( buf ), "%s%d%s", pShaderName, i, DLL_EXT_STRING );
+#else
 		Q_snprintf( buf, sizeof( buf ), "lib%s%d%s", pShaderName, i, DLL_EXT_STRING );
+#endif
 		LoadShaderDLL( buf );
 	}
 

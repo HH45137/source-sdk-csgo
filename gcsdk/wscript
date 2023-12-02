@@ -31,8 +31,7 @@ def build(bld):
 		'steamextra/tier1/tsmultimempool.cpp',
 		'workthreadpool.cpp',
 		'webapi_response.cpp',
-		'../thirdparty/JSON_parser/JSON_parser.c',
-		'../public/tier0/memoverride.cpp'
+		'../thirdparty/JSON_parser/JSON_parser.c'
 	]
 
 	includes = [
@@ -45,22 +44,13 @@ def build(bld):
 		'../thirdparty/protobuf-3.2.0/src'
 	]
 
-	libs = [
-		'tier0',
-		'tier1',
-		'interfaces',
-		'vstdlib',
-		'generated_proto',
-		'protobuf',
-		'steam_api'
-	]
+	libs = []
 
-	bld.shlib(
+	bld.stlib(
 		target = 'gcsdk',
 		features = 'c cxx',
 		source = source,
 		includes = includes,
 		use = libs,
-		install_path = bld.env.LIBDIR,
 		subsystem = bld.env.MSVC_SUBSYSTEM
 	)

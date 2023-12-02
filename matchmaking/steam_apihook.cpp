@@ -25,7 +25,7 @@ CSteamAPIContext *steamapicontext = &g_SteamAPIContext;
 void SteamApiContext_Init()
 {
 #ifndef _PS3
-	if ( !SteamAPI_InitSafe() )
+	if ( !SteamAPI_Init() )
 		return;
 #endif
 

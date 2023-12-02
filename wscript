@@ -30,6 +30,7 @@ SubProjects = [
 	'launcher',
 	'launcher_main',
 	'localize',
+	'matchmaking',
 	'materialsystem',
 	'materialsystem/shaderapidx9',
 	'materialsystem/shaderlib',
