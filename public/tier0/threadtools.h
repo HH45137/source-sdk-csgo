@@ -1925,6 +1925,7 @@ private:
 	CThread( const CThread & );
 	CThread &operator=( const CThread & );
 
+	ThreadInit_t m_threadInit;
 #ifdef _WIN32
 	HANDLE 	m_hThread;
 	ThreadId_t m_threadId;

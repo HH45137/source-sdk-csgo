@@ -54,6 +54,7 @@ SubProjects = [
 	'videocfg',
 	'vphysics',
 	'vpklib',
+	'vscript',
 	'vstdlib',
 	'vtf'
 ]

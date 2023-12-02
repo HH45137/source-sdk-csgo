@@ -111,6 +111,7 @@ INLINE_ON_PS3 bool CThread::Start( unsigned nBytesStack, ThreadPriorityEnum_t nP
 	bool  bInitSuccess = false;
 	CThreadEvent createComplete;
 	ThreadInit_t init = { this, &createComplete, &bInitSuccess };
+	m_threadInit = ThreadInit_t( init );
 
 #if defined( THREAD_PARENT_STACK_TRACE_ENABLED )
 	{
@@ -126,7 +127,7 @@ INLINE_ON_PS3 bool CThread::Start( unsigned nBytesStack, ThreadPriorityEnum_t nP
 	m_hThread = (HANDLE)CreateThread( NULL,
 		nBytesStack,
 		(LPTHREAD_START_ROUTINE)GetThreadProc(),
-		new ThreadInit_t(init),
+		&m_threadInit,
 		nBytesStack ? STACK_SIZE_PARAM_IS_A_RESERVATION : 0,
 		(LPDWORD)&m_threadId );
 
@@ -159,7 +160,7 @@ INLINE_ON_PS3 bool CThread::Start( unsigned nBytesStack, ThreadPriorityEnum_t nP
 	const char* threadName=m_szName;
 	if ( sys_ppu_thread_create( &m_threadId, 
 			(void(*)(uint64_t))GetThreadProc(), 
-			(uint64_t)(new ThreadInit_t( init )), 
+			(uint64_t)&m_threadInit, 
 			nPriority, 
 			nBytesStack, 
 			SYS_PPU_THREAD_CREATE_JOINABLE  , 
@@ -174,7 +175,7 @@ INLINE_ON_PS3 bool CThread::Start( unsigned nBytesStack, ThreadPriorityEnum_t nP
 	pthread_attr_t attr;
 	pthread_attr_init( &attr );
 	pthread_attr_setstacksize( &attr, MAX( nBytesStack, 1024u*1024 ) );
-	if ( pthread_create( &m_threadId, &attr, (void *(*)(void *))GetThreadProc(), new ThreadInit_t( init ) ) != 0 )
+	if ( pthread_create( &m_threadId, &attr, (void *(*)(void *))GetThreadProc(), &m_threadInit ) )
 	{
 		AssertMsg1( 0, "Failed to create thread (error 0x%x)", GetLastError() );
 		return false;
