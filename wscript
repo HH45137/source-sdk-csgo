@@ -50,6 +50,7 @@ SubProjects = [
 	'togl',
 	'utils/bzip2',
 	'vgui2/matsys_controls',
+	'vgui2/src',
 	'vgui2/vgui_controls',
 	'vgui2/vgui_surfacelib',
 	'vguimatsurface',
