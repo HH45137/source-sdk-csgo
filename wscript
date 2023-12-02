@@ -31,7 +31,9 @@ SubProjects = [
 	'launcher_main',
 	'localize',
 	'materialsystem',
+	'materialsystem/shaderapidx9',
 	'materialsystem/shaderlib',
+	'materialsystem/stdshaders',
 	'mathlib',
 	'mathlib/extended',
 	'soundemittersystem',
@@ -160,6 +162,7 @@ def configure(conf):
 	cxxflags = ['/std:c++17'] if conf.env.COMPILER_CC == 'msvc' else ['-std=c++17'] # require c++17 support
 
 	defines = [
+		'CSTRIKE15',
 		'CSTRIKE_REL_BUILD=1',
 		'RAD_TELEMETRY_DISABLED'
 	]

@@ -1312,21 +1312,7 @@ void Key_Event( const InputEvent_t &event )
 		// Let vgui have a whack at keys
 		if ( FilterKey( event, KEY_UP_VGUI, HandleVGuiKey ) )
 			return;
-
-#if defined( INCLUDE_SCALEFORM )
-		// scaleform goes first
-		if ( FilterKey( event, KEY_UP_SCALEFORM, HandleScaleformKey ) )
-			return;
-#endif
 	}
-#if defined ( CSTRIKE15 )
-	else if ( g_ClientDLL->IsChatRaised() || g_ClientDLL->IsBindMenuRaised() )
-	{
-		if ( FilterKey( event, KEY_UP_SCALEFORM, HandleScaleformKey ) )
-			return;
-	}
-
-#endif
 
 	// Let the new GameUI system have a whack at keys
 	if ( FilterKey( event, KEY_UP_GAMEUI, HandleGameUIKey ) )
@@ -1340,23 +1326,6 @@ void Key_Event( const InputEvent_t &event )
 	// let's see if VGUI wants to do something with it.
 	if ( IsESC( event ) )
 	{
-#if defined( INCLUDE_SCALEFORM ) 
-		bool bAllowScaleformFilter = true;
-		static ConVarRef cv_console_window_open( "console_window_open" );
-		static ConVarRef cv_server_browser_dialog_open( "server_browser_dialog_open" );
-		if ( ( cv_console_window_open.GetBool() ) ||
-			 ( cv_server_browser_dialog_open.GetBool() ) ||
-			 ( EngineSoundClient() && EngineSoundClient()->IsMoviePlaying() ) )
-		{
-			// make closing the console window, server browser dialog, or exiting a movie priority
-			bAllowScaleformFilter = false;
-		}
-
-		if ( bAllowScaleformFilter && FilterKey( event, KEY_UP_SCALEFORM, HandleScaleformKey ) )
-			return;
-
-#endif // INCLUDE_SCALEFORM
-
 		// Let vgui have a whack at keys
 		if ( FilterKey( event, KEY_UP_VGUI, HandleVGuiKey ) )
 			return;

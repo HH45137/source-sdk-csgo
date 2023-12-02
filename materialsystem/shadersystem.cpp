@@ -312,17 +312,6 @@ void CShaderSystem::LoadAllShaderDLLs( )
 	// Add the shaders to the dictionary of shaders...
 	SetupShaderDictionary( i );
 
-#if defined( _PS3 ) || defined( _OSX )
-	LoadShaderDLL( "stdshader_dx9" DLL_EXT_STRING );
-#else // _PS3 || _OSX
-
-	// 360 has the the debug shaders in its dx9 dll
-	if ( IsPC() || !IsX360() )
-	{
-		// Always need the debug shaders
-		LoadShaderDLL( "stdshader_dbg" );
-	}
-
 	// Load up standard shader DLLs...
 	int dxSupportLevel = HardwareConfig()->GetMaxDXSupportLevel();
 	Assert( dxSupportLevel >= 60 );
@@ -333,7 +322,7 @@ void CShaderSystem::LoadAllShaderDLLs( )
 	char buf[32];
 	for ( i = dxStart; i <= dxSupportLevel; ++i )
 	{
-		Q_snprintf( buf, sizeof( buf ), "stdshader_dx%d", i );
+		Q_snprintf( buf, sizeof( buf ), "libstdshader_dx%d%s", i, DLL_EXT_STRING );
 		LoadShaderDLL( buf );
 	}
 
@@ -347,7 +336,8 @@ void CShaderSystem::LoadAllShaderDLLs( )
 	}
 	if ( pShaderName )
 	{
-		LoadShaderDLL( pShaderName );
+		Q_snprintf( buf, sizeof( buf ), "lib%s%d%s", pShaderName, i, DLL_EXT_STRING );
+		LoadShaderDLL( buf );
 	}
 
 #ifdef _DEBUG
@@ -357,7 +347,6 @@ void CShaderSystem::LoadAllShaderDLLs( )
 		LoadShaderDLL( "shader_test" );
 	}
 #endif
-#endif // !_PS3
 }
 
 void CShaderSystem::LoadModShaderDLLs( int dxSupportLevel )
