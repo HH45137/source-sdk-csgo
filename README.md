@@ -6,3 +6,4 @@
 - [mini-source-sdk](https://github.com/Joshua-Ashton/mini-source-sdk)
 - [VAudio-MiniMP3](https://github.com/Joshua-Ashton/VAudio-MiniMP3)
 - [Goldberg's Emulator](https://gitlab.com/Mr_Goldberg/goldberg_emulator)
+- [mainui_cpp](https://github.com/FWGS/mainui_cpp)
